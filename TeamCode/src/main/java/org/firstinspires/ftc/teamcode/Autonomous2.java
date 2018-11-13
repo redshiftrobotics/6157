@@ -4,9 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name = "Eclipse Teleop")
-public class Teleop extends LinearOpMode {
+
+@TeleOp(name = "Autonomous2")
+public class Autonomous2 extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
@@ -17,6 +19,7 @@ public class Teleop extends LinearOpMode {
     DcMotor armLiftTopB;
 
     DcMotor intakeMotor;
+    public ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() {
@@ -25,8 +28,8 @@ public class Teleop extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
-
-        this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE );
+        //Q: is this important? (below)
+        this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
         this.armLiftBottomA = hardwareMap.dcMotor.get("bottom_a");
         this.armLiftBottomB = hardwareMap.dcMotor.get("bottom_b");
@@ -38,21 +41,24 @@ public class Teleop extends LinearOpMode {
         telemetry.addLine("Done.");
         telemetry.update();
 
-        waitForStart();
 
-        while (opModeIsActive()) {
-            this.leftDrive.setPower(gamepad1.right_stick_y);
-            this.rightDrive.setPower(gamepad1.left_stick_y);
+        while (getRuntime()< 3) {
+            //makes robot move, but how does it stop? Need:rotation count
 
-            this.armLiftBottomA.setPower(gamepad2.left_stick_y);
-            this.armLiftBottomB.setPower(gamepad2.left_stick_y);
-            this.armLiftTopA.setPower(gamepad2.right_stick_y);
-            this.armLiftTopB.setPower(gamepad2.right_stick_y);
+            this.leftDrive.setPower(.5);
+            this.rightDrive.setPower(.5);
 
-            this.intakeMotor.setPower(gamepad2.left_trigger);
-            this.intakeMotor.setPower(-gamepad2.right_trigger);
+            //this.armLiftBottomA.setPower(gamepad2.left_stick_y);
+            //this.armLiftBottomB.setPower(gamepad2.left_stick_y);
+            //this.armLiftTopA.setPower(gamepad2.right_stick_y);
+            //this.armLiftTopB.setPower(gamepad2.right_stick_y);
+
+            //this.intakeMotor.setPower(gamepad2.left_trigger);
+            //this.intakeMotor.setPower(-gamepad2.right_trigger);
 
             idle();
         }
+
+        waitForStart();
     }
 }
