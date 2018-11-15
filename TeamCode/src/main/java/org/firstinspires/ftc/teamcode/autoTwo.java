@@ -67,7 +67,7 @@ public class autoTwo extends LinearOpMode {
                 tfod.activate();
             }
 
-            while (opModeIsActive()) {
+            while (opModeIsActive()) {//Additional to do: perhaps make this (the recognition) a separate class/function so that it can be called from both autonomous scripts
 
 
                 if (tfod != null) {
@@ -76,17 +76,26 @@ public class autoTwo extends LinearOpMode {
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
-                        if (updatedRecognitions.size() == 3) {
-                            int goldMineralX = -1;
+                        if (updatedRecognitions.size() >= 3) {//next to do: alter code to be more flexible with more than 3 objects and distinguish starting with size
+                            int goldMineralX = -1; //should these be floats? (for increased accuracy)
+                            int goldMineralWidth = 0; //privatize to scope?
                             int silverMineral1X = -1;
+                            int silverMineral1Width = 0;
                             int silverMineral2X = -1;
-                            for (Recognition recognition : updatedRecognitions) {
-                                if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) {
+                            int silverMineral2Width = 0;
+
+                            for (Recognition recognition : updatedRecognitions) {//establishes the width and x position of the widest gold mineral and 2 widest silver minerals
+                                if (recognition.getLabel().equals(LABEL_GOLD_MINERAL) && recognition.getWidth() > goldMineralWidth) {//Compares width to previously identified gold object to identify which is closer (possibly should compare width*height?)
                                     goldMineralX = (int) recognition.getLeft();
-                                } else if (silverMineral1X == -1) {
+                                    goldMineralWidth = (int) recognition.getWidth();
+                                } else if (recognition.getLabel().equals(LABEL_SILVER_MINERAL) && silverMineral1Width <= recognition.getWidth()) {
+                                    silverMineral2X = silverMineral1X;
+                                    silverMineral2Width = silverMineral1Width;
                                     silverMineral1X = (int) recognition.getLeft();
-                                } else {
+                                    silverMineral1Width = (int) recognition.getWidth();
+                                } else if (recognition.getLabel().equals(LABEL_SILVER_MINERAL) && silverMineral2Width <= recognition.getWidth()) {
                                     silverMineral2X = (int) recognition.getLeft();
+                                    silverMineral2Width = (int) recognition.getWidth();
                                 }
                             }
                             if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
@@ -100,9 +109,9 @@ public class autoTwo extends LinearOpMode {
                                     telemetry.addData("Gold Mineral Position", "Center");
                                     position = MineralPosition.CENTER;
                                 }
-                            }
+                            } else {/*some code to try again? or just catch that not enough objects were identified*/}
                         }
-                        telemetry.update();
+                        telemetry.update();//extra credit: use visual coordinates (goldMineralX) to help robot direct itself towards the gold mineral or, for extra extra credit, *explicitly* identify the gold mineral object and track it for the duration (rather than using its reference position once to execute preplanned maneuvers)
                     }
 
                     if (position == MineralPosition.LEFT) {
