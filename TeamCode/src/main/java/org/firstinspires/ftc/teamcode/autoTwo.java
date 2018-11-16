@@ -86,15 +86,15 @@ public class autoTwo extends LinearOpMode {
 
                             for (Recognition recognition : updatedRecognitions) {//establishes the width and x position of the widest gold mineral and 2 widest silver minerals
                                 if (recognition.getLabel().equals(LABEL_GOLD_MINERAL) && recognition.getWidth() > goldMineralWidth) {//Compares width to previously identified gold object to identify which is closer (possibly should compare width*height?)
-                                    goldMineralX = (int) recognition.getLeft();
+                                    goldMineralX = (int) recognition.getTop();//Camera is flipped with its top side on the left, so we use .getTop()
                                     goldMineralWidth = (int) recognition.getWidth();
                                 } else if (recognition.getLabel().equals(LABEL_SILVER_MINERAL) && silverMineral1Width <= recognition.getWidth()) {
                                     silverMineral2X = silverMineral1X;
                                     silverMineral2Width = silverMineral1Width;
-                                    silverMineral1X = (int) recognition.getLeft();
+                                    silverMineral1X = (int) recognition.getTop();
                                     silverMineral1Width = (int) recognition.getWidth();
                                 } else if (recognition.getLabel().equals(LABEL_SILVER_MINERAL) && silverMineral2Width <= recognition.getWidth()) {
-                                    silverMineral2X = (int) recognition.getLeft();
+                                    silverMineral2X = (int) recognition.getTop();
                                     silverMineral2Width = (int) recognition.getWidth();
                                 }
                             }
@@ -109,7 +109,10 @@ public class autoTwo extends LinearOpMode {
                                     telemetry.addData("Gold Mineral Position", "Center");
                                     position = MineralPosition.CENTER;
                                 }
-                            } else {/*some code to try again? or just catch that not enough objects were identified*/}
+                                telemetry.addData("X-position & Width", goldMineralX + " " + goldMineralWidth);
+                            } else {
+                                telemetry.addLine("More objects needed to identify position.");
+                            }
                         }
                         telemetry.update();//extra credit: use visual coordinates (goldMineralX) to help robot direct itself towards the gold mineral or, for extra extra credit, *explicitly* identify the gold mineral object and track it for the duration (rather than using its reference position once to execute preplanned maneuvers)
                     }
