@@ -32,6 +32,10 @@ public class Autonomous extends LinearOpMode {
         //Q: is this important? (below)
         //Otherwise the drive controls for the joysticks are fucked.
         this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 //        this.armLiftBottomA = hardwareMap.dcMotor.get("bottom_a");
 //        this.armLiftBottomB = hardwareMap.dcMotor.get("bottom_b");
@@ -50,8 +54,12 @@ public class Autonomous extends LinearOpMode {
             // This could be *Encoders* (A piece of hardware that you put on your wheels that can
             //help you control for things like battery power etc. OR PID... --- Alek is looking into this
 
-            this.leftDrive.setPower(.5);
-            this.rightDrive.setPower(.5);
+            leftDrive.setTargetPosition();
+            leftDrive.setPower();
+            rightDrive.setTargetPosition();
+            rightDrive.setPower();
+
+
 
             //this.armLiftBottomA.setPower(gamepad2.left_stick_y);
             //this.armLiftBottomB.setPower(gamepad2.left_stick_y);
