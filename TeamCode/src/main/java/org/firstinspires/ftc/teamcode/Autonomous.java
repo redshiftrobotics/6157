@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.sun.tools.javac.util.Position;
 
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = Autonomous)
@@ -53,11 +54,21 @@ public class Autonomous extends LinearOpMode {
             //makes robot move, but how does it stop? Need:rotation count
             // This could be *Encoders* (A piece of hardware that you put on your wheels that can
             //help you control for things like battery power etc. OR PID... --- Alek is looking into this
+            int leftPosition = leftDrive.getCurrentPosition();
+            int rightPosition = rightDrive.getCurrentPosition();
+
+            telemetry.addData("Left Encoder Position", leftPosition);
+            telemetry.addData("Right Encoder Position", rightPosition);
 
             leftDrive.setTargetPosition();
             leftDrive.setPower();
             rightDrive.setTargetPosition();
             rightDrive.setPower();
+
+            //wait(until leftPosition = X);
+
+            telemetry.addData("Left Encoder Position", leftPosition);
+            telemetry.addData("Right Encoder Position", rightPosition);
 
 
 
