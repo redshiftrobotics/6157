@@ -1,15 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.sun.tools.javac.util.Position;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = Autonomous)
-public class Autonomous extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Autonomous")
+public class autoWithEncoders extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
@@ -60,10 +60,10 @@ public class Autonomous extends LinearOpMode {
             telemetry.addData("Left Encoder Position", leftPosition);
             telemetry.addData("Right Encoder Position", rightPosition);
 
-            leftDrive.setTargetPosition();
-            leftDrive.setPower();
-            rightDrive.setTargetPosition();
-            rightDrive.setPower();
+            leftDrive.setTargetPosition(5000);
+            leftDrive.setPower(0.2);
+            rightDrive.setTargetPosition(5000);
+            rightDrive.setPower(0.2);
 
             //wait(until leftPosition = X);
 
