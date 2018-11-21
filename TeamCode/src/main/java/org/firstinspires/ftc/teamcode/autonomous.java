@@ -9,7 +9,7 @@ import com.sun.tools.javac.util.Position;
 
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Autonomous")
-public class autoWithEncoders extends LinearOpMode {
+public class autonomous extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
@@ -23,8 +23,10 @@ public class autoWithEncoders extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
+
     @Override
     public void runOpMode() {
+
         telemetry.addLine("Initializing...");
         telemetry.update();
 
@@ -32,7 +34,7 @@ public class autoWithEncoders extends LinearOpMode {
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
         //Q: is this important? (below)
         //Otherwise the drive controls for the joysticks are fucked.
-        this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -49,26 +51,33 @@ public class autoWithEncoders extends LinearOpMode {
         telemetry.addLine("Done.");
         telemetry.update();
 
+        waitForStart();
 
-        while (getRuntime()< 3) {
+        while (opModeIsActive()) {
             //makes robot move, but how does it stop? Need:rotation count
             // This could be *Encoders* (A piece of hardware that you put on your wheels that can
             //help you control for things like battery power etc. OR PID... --- Alek is looking into this
+//            leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//            rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
             int leftPosition = leftDrive.getCurrentPosition();
             int rightPosition = rightDrive.getCurrentPosition();
 
             telemetry.addData("Left Encoder Position", leftPosition);
             telemetry.addData("Right Encoder Position", rightPosition);
 
-            leftDrive.setTargetPosition(5000);
-            leftDrive.setPower(0.2);
-            rightDrive.setTargetPosition(5000);
-            rightDrive.setPower(0.2);
+            leftDrive.setTargetPosition(10286);
+            leftDrive.setPower(-0.5);
+            rightDrive.setTargetPosition(-10286);
+            rightDrive.setPower(-0.5);
+            //10000 is 56 in
+            //1000 is 35 degrees
 
             //wait(until leftPosition = X);
 
             telemetry.addData("Left Encoder Position", leftPosition);
             telemetry.addData("Right Encoder Position", rightPosition);
+            telemetry.update();
 
 
 
