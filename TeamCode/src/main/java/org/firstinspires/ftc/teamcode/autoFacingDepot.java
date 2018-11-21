@@ -3,6 +3,9 @@ package org.firstinspires.ftc.robotcontroller.external.samples;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.sun.tools.javac.util.Position;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
@@ -11,10 +14,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
 
-
 @Autonomous(name = "Autonomous One", group = "Things")
 // @Disabled
-public class autoOne extends LinearOpMode {
+public class autoFacingDepot extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
@@ -37,6 +39,59 @@ public class autoOne extends LinearOpMode {
 
     }
 
+    public void resetEncoders() {
+        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    int targetPosition = 0;
+    double power = 0;
+
+    int leftPosition = leftDrive.getCurrentPosition();
+    int rightPosition = rightDrive.getCurrentPosition();
+
+    public void waitToFinish() {
+        while (opModeIsActive() && (leftDrive.isBusy() || rightDrive.isBusy())) {
+            telemetry.addData("Left Encoder Position", leftPosition);
+            telemetry.addData("Right Encoder Position", rightPosition);
+            telemetry.update();
+            idle();
+        }
+    }
+
+    public void rotateLeft() {
+        leftDrive.setTargetPosition(targetPosition);
+        leftDrive.setPower(power);
+        rightDrive.setTargetPosition(-targetPosition);
+        rightDrive.setPower(power);
+        waitToFinish();
+    }
+
+    public void rotateRight() {
+        leftDrive.setTargetPosition(-targetPosition);
+        leftDrive.setPower(power);
+        leftDrive.setTargetPosition(targetPosition);
+        leftDrive.setPower(power);
+        waitToFinish();
+    }
+
+    public void driveForeward() {
+        leftDrive.setTargetPosition(targetPosition);
+        leftDrive.setPower(power);
+        rightDrive.setTargetPosition(targetPosition);
+        rightDrive.setPower(power);
+        waitToFinish();
+    }
+
+
+
+
+
+
+    private ElapsedTime runtime = new ElapsedTime();
+
     @Override
     public void runOpMode() {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
@@ -47,6 +102,10 @@ public class autoOne extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
+
+        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         initVuforia();
 
@@ -105,12 +164,123 @@ public class autoOne extends LinearOpMode {
                         telemetry.update();
                     }
 
+
+
+
+
                     if (position == MineralPosition.LEFT) {
+
+                        resetEncoders();
+
+                        targetPosition = 857; //30 degrees
+                        power = -0.2;
+
+                        rotateLeft();
+
+                        resetEncoders();
+
+                        targetPosition = 7858; //44 inches
+                        power = -0.5;
+
+                        driveForeward();
+
+                        resetEncoders();
+
+                        targetPosition = 2114;  //74 degrees
+                        power = -0.2;
+
+                        rotateRight();
+
+                        resetEncoders();
+
+                        targetPosition = 5446; //30.5 inches
+                        power = -0.5;
+
+                        driveForeward();
+
+                        //placeTeamMarker();
+
+                        resetEncoders();
+
+                        targetPosition = 15089; //84.5 inches
+                        power = 0.75;
+                        //power positive to make robot move backwards
+
+                        driveForeward();
+
 
                     } else if (position == MineralPosition.RIGHT) {
 
-                    } else {
-                          
+                        resetEncoders();
+
+                        targetPosition = 857; //30 degrees
+                        power = -0.2;
+
+                        rotateRight();
+
+                        resetEncoders();
+
+                        targetPosition = 7858; //44 inches
+                        power = -0.5;
+
+                        driveForeward();
+
+                        resetEncoders();
+
+                        targetPosition = 2114;  //74 degrees
+                        power = -0.2;
+
+                        rotateLeft();
+
+                        resetEncoders();
+
+                        targetPosition = 5446; //30.5 inches
+                        power = -0.5;
+
+                        driveForeward();
+
+                        //placeTeamMarker();
+
+                        resetEncoders();
+
+                        targetPosition = 2571; //90 degrees
+                        power = -0.2;
+
+                        rotateLeft();
+
+                        resetEncoders();
+
+                        targetPosition = 15089; //84.5 inches
+                        power = -0.75;
+
+                        driveForeward();
+
+
+                    } else { //mineralPosition.CENTER or not found
+
+                        resetEncoders();
+
+                        targetPosition = 10714; //60 inches
+                        power = -0.5;
+
+                        driveForeward();
+
+                        //placeTeamMarker():
+
+                        resetEncoders();
+
+                        targetPosition = 3857; //137 degrees
+                        power = -0.2;
+
+                        rotateLeft();
+
+                        resetEncoders();
+
+                        targetPosition = 15089; //84.5 inches
+                        power = -0.75;
+
+                        driveForeward();
+
                     }
 
 
