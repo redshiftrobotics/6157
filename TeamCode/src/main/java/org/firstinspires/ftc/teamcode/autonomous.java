@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.sun.tools.javac.util.Position;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Autonomous")
-public class autoWithEncoders extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "autonomous")
+public class autonomous extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
@@ -60,10 +60,10 @@ public class autoWithEncoders extends LinearOpMode {
             telemetry.addData("Left Encoder Position", leftPosition);
             telemetry.addData("Right Encoder Position", rightPosition);
 
-            leftDrive.setTargetPosition(5000);
-            leftDrive.setPower(0.2);
-            rightDrive.setTargetPosition(5000);
-            rightDrive.setPower(0.2);
+            leftDrive.setTargetPosition(3000);
+            leftDrive.setPower(-0.2);
+            rightDrive.setTargetPosition(3000);
+            rightDrive.setPower(-0.2);
 
             //wait(until leftPosition = X);
 
