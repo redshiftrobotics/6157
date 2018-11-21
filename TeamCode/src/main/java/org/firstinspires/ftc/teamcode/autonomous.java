@@ -73,6 +73,7 @@ public class autonomous extends LinearOpMode {
             rightDrive.setPower(-0.5);
             //10000 is 56 in
             //1000 is 35 degrees
+            //10286 is approximately 370-75 degrees (so not linear, with a 90-95 degree difference)
 
             //wait(until leftPosition = X);
 
