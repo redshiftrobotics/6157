@@ -8,7 +8,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.sun.tools.javac.util.Position;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Autonomous")
+
+@Autonomous(name = "autonomous")
 public class autonomous extends LinearOpMode {
 
     DcMotor leftDrive;
