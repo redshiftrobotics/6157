@@ -16,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
 @Autonomous(name = "Autonomous One", group = "Things")
 // @Disabled
-public class autoFacingDepot extends LinearOpMode {
+public class autoFacingCreater extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
@@ -31,7 +31,7 @@ public class autoFacingDepot extends LinearOpMode {
 
     private TFObjectDetector tfod;
 
-    private org.firstinspires.ftc.robotcontroller.external.samples.autoFacingDepot.MineralPosition position;
+    private org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition position;
 
     enum MineralPosition {
 
@@ -211,13 +211,13 @@ public class autoFacingDepot extends LinearOpMode {
                             if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
                                 if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
                                     telemetry.addData("Gold Mineral Position", "Left");
-                                    position = org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.LEFT;
+                                    position = org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.LEFT;
                                 } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
                                     telemetry.addData("Gold Mineral Position", "Right");
-                                    position = org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.RIGHT;
+                                    position = org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT;
                                 } else {
                                     telemetry.addData("Gold Mineral Position", "Center");
-                                    position = org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.CENTER;
+                                    position = org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.CENTER;
                                 }
                             }
                         }
@@ -228,7 +228,7 @@ public class autoFacingDepot extends LinearOpMode {
 
 
 
-                    if (position == org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.LEFT) {
+                    if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.LEFT) {
 
                         driveToMarkerAndBack();
 
@@ -260,7 +260,7 @@ public class autoFacingDepot extends LinearOpMode {
                         driveForeward();
 
 
-                    } else if (position == org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.RIGHT) {
+                    } else if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT) {
 
                         driveToMarkerAndBack();
 
