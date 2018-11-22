@@ -14,7 +14,6 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
     //I think I know why this is breaking
 
-
 @Autonomous(name = "Autonomous One", group = "Things")
 // @Disabled
 public class autoFacingDepot extends LinearOpMode {
@@ -32,7 +31,7 @@ public class autoFacingDepot extends LinearOpMode {
 
     private TFObjectDetector tfod;
 
-    private MineralPosition position;
+    private org.firstinspires.ftc.robotcontroller.external.samples.autoFacingDepot.MineralPosition position;
 
     enum MineralPosition {
 
@@ -84,6 +83,66 @@ public class autoFacingDepot extends LinearOpMode {
         rightDrive.setTargetPosition(targetPosition);
         rightDrive.setPower(power);
         waitToFinish();
+    }
+
+    public void driveToMarkerAndBack() {
+        resetEncoders();
+
+        targetPosition = 1714; //60 degrees
+        power = -0.2;
+
+        rotateLeft();
+
+        resetEncoders();
+
+        targetPosition = 7679; //43 inches
+        power = -0.5;
+
+        driveForeward();
+
+        resetEncoders();
+
+        targetPosition = 2143; //75 degrees
+        power = -0.2;
+
+        rotateLeft();
+
+        resetEncoders();
+
+        targetPosition = 11786; //66 inches
+        power = -0.75;
+
+        driveForeward();
+
+        //placeTeamMarker():
+
+        resetEncoders();
+
+        targetPosition = 11786; //66 inches
+        power = 0.75; //power is posative to indicate reverse
+
+        driveForeward();
+
+        resetEncoders();
+
+        targetPosition = 2143; //75 degrees
+        power = -0.2;
+
+        rotateRight();
+
+        resetEncoders();
+
+        targetPosition = 7679; //43 inches
+        power = 0.5; //power is positive to indicate reverse
+
+        driveForeward();
+
+        resetEncoders();
+
+        targetPosition = 1714; //60 degrees
+        power = 0.2;
+
+        rotateRight();
     }
 
 
@@ -152,13 +211,13 @@ public class autoFacingDepot extends LinearOpMode {
                             if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
                                 if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
                                     telemetry.addData("Gold Mineral Position", "Left");
-                                    position = MineralPosition.LEFT;
+                                    position = org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.LEFT;
                                 } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
                                     telemetry.addData("Gold Mineral Position", "Right");
-                                    position = MineralPosition.RIGHT;
+                                    position = org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.RIGHT;
                                 } else {
                                     telemetry.addData("Gold Mineral Position", "Center");
-                                    position = MineralPosition.CENTER;
+                                    position = org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.CENTER;
                                 }
                             }
                         }
@@ -169,118 +228,78 @@ public class autoFacingDepot extends LinearOpMode {
 
 
 
-                    if (position == MineralPosition.LEFT) {
+                    if (position == org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.LEFT) {
+
+                        driveToMarkerAndBack();
 
                         resetEncoders();
 
                         targetPosition = 857; //30 degrees
-                        power = -0.2;
+                        power = 0.2;
 
                         rotateLeft();
 
                         resetEncoders();
 
-                        targetPosition = 7858; //44 inches
-                        power = -0.5;
+                        targetPosition = 5268; //29.5 inches
+                        power = 0.5;
 
                         driveForeward();
 
                         resetEncoders();
 
-                        targetPosition = 2114;  //74 degrees
-                        power = -0.2;
+                        targetPosition = 2400; //84 degrees
+                        power = 0.2;
 
                         rotateRight();
 
                         resetEncoders();
 
-                        targetPosition = 5446; //30.5 inches
-                        power = -0.5;
-
-                        driveForeward();
-
-                        //placeTeamMarker();
-
-                        resetEncoders();
-
-                        targetPosition = 15089; //84.5 inches
-                        power = 0.75;
-                        //power positive to make robot move backwards
+                        targetPosition = 3214; //18 inches
 
                         driveForeward();
 
 
-                    } else if (position == MineralPosition.RIGHT) {
+                    } else if (position == org.firstinspires.ftc.robotcontroller.external.samples.autoFacingCreater.MineralPosition.RIGHT) {
+
+                        driveToMarkerAndBack();
 
                         resetEncoders();
 
                         targetPosition = 857; //30 degrees
-                        power = -0.2;
+                        power = 0.2;
 
                         rotateRight();
 
                         resetEncoders();
 
-                        targetPosition = 7858; //44 inches
-                        power = -0.5;
+                        targetPosition = 5268; //29.5 inches
+                        power = 0.5;
 
                         driveForeward();
 
                         resetEncoders();
 
-                        targetPosition = 2114;  //74 degrees
-                        power = -0.2;
+                        targetPosition = 2400; //84 degrees
+                        power = 0.2;
 
                         rotateLeft();
 
                         resetEncoders();
 
-                        targetPosition = 5446; //30.5 inches
-                        power = -0.5;
+                        targetPosition = 3214; //18 inches
 
                         driveForeward();
-
-                        //placeTeamMarker();
-
-                        resetEncoders();
-
-                        targetPosition = 2571; //90 degrees
-                        power = -0.2;
-
-                        rotateLeft();
-
-                        resetEncoders();
-
-                        targetPosition = 15089; //84.5 inches
-                        power = -0.75;
-
-                        driveForeward();
-
 
                     } else { //mineralPosition.CENTER or not found
 
-                        resetEncoders();
+                        driveToMarkerAndBack();
 
-                        targetPosition = 10714; //60 inches
-                        power = -0.5;
-
-                        driveForeward();
-
-                        //placeTeamMarker():
-
-                        resetEncoders();
-
-                        targetPosition = 3857; //137 degrees
-                        power = -0.2;
-
-                        rotateLeft();
-
-                        resetEncoders();
-
-                        targetPosition = 15089; //84.5 inches
-                        power = -0.75;
+                        targetPosition = 6429; //36 inches
 
                         driveForeward();
+
+
 
                     }
 
