@@ -46,9 +46,6 @@ public class autoFacingCreater extends LinearOpMode {
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    int targetPosition = 0;
-    double power = 0;
-
     int leftPosition = leftDrive.getCurrentPosition();
     int rightPosition = rightDrive.getCurrentPosition();
 
@@ -61,7 +58,8 @@ public class autoFacingCreater extends LinearOpMode {
         }
     }
 
-    public void rotateLeft() {
+    public void rotateLeft(int targetPosition, double power) {
+        resetEncoders();
         leftDrive.setTargetPosition(targetPosition);
         leftDrive.setPower(power);
         rightDrive.setTargetPosition(-targetPosition);
@@ -69,7 +67,8 @@ public class autoFacingCreater extends LinearOpMode {
         waitToFinish();
     }
 
-    public void rotateRight() {
+    public void rotateRight(int targetPosition, double power) {
+        resetEncoders();
         leftDrive.setTargetPosition(-targetPosition);
         leftDrive.setPower(power);
         leftDrive.setTargetPosition(targetPosition);
@@ -77,7 +76,8 @@ public class autoFacingCreater extends LinearOpMode {
         waitToFinish();
     }
 
-    public void driveForeward() {
+    public void driveForeward(int targetPosition, double power) {
+        resetEncoders();
         leftDrive.setTargetPosition(targetPosition);
         leftDrive.setPower(power);
         rightDrive.setTargetPosition(targetPosition);
@@ -86,63 +86,24 @@ public class autoFacingCreater extends LinearOpMode {
     }
 
     public void driveToMarkerAndBack() {
-        resetEncoders();
 
-        targetPosition = 1714; //60 degrees
-        power = -0.2;
+        rotateLeft(1714, -0.2); //60 degrees
 
-        rotateLeft();
+        driveForeward(7679, -0.5); //43 inches
 
-        resetEncoders();
+        rotateLeft(2143, -0.2); //75 degrees
 
-        targetPosition = 7679; //43 inches
-        power = -0.5;
-
-        driveForeward();
-
-        resetEncoders();
-
-        targetPosition = 2143; //75 degrees
-        power = -0.2;
-
-        rotateLeft();
-
-        resetEncoders();
-
-        targetPosition = 11786; //66 inches
-        power = -0.75;
-
-        driveForeward();
+        driveForeward(11786, -0.75); //66 inches
 
         //placeTeamMarker():
 
-        resetEncoders();
+        driveForeward(11786, 0.75); //66 inches, power is positive to indicate reverse
 
-        targetPosition = 11786; //66 inches
-        power = 0.75; //power is posative to indicate reverse
+        rotateRight(2143, -0.2); //75 degrees
 
-        driveForeward();
+        driveForeward(7679, 0.5); //43 inches, power is positive to indicate reverse
 
-        resetEncoders();
-
-        targetPosition = 2143; //75 degrees
-        power = -0.2;
-
-        rotateRight();
-
-        resetEncoders();
-
-        targetPosition = 7679; //43 inches
-        power = 0.5; //power is positive to indicate reverse
-
-        driveForeward();
-
-        resetEncoders();
-
-        targetPosition = 1714; //60 degrees
-        power = 0.2;
-
-        rotateRight();
+        rotateRight(1714, -0.2); //60 degrees
     }
 
 
@@ -232,72 +193,32 @@ public class autoFacingCreater extends LinearOpMode {
 
                         driveToMarkerAndBack();
 
-                        resetEncoders();
+                        rotateLeft(857, -0.2); //30 degrees
 
-                        targetPosition = 857; //30 degrees
-                        power = 0.2;
+                        driveForeward(5268, -0.5); //29.5 inches
 
-                        rotateLeft();
+                        rotateRight(2400, -0.2); //84 degrees
 
-                        resetEncoders();
-
-                        targetPosition = 5268; //29.5 inches
-                        power = 0.5;
-
-                        driveForeward();
-
-                        resetEncoders();
-
-                        targetPosition = 2400; //84 degrees
-                        power = 0.2;
-
-                        rotateRight();
-
-                        resetEncoders();
-
-                        targetPosition = 3214; //18 inches
-
-                        driveForeward();
+                        driveForeward(3214, 0.5); //18 inches
 
 
                     } else if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT) {
 
                         driveToMarkerAndBack();
 
-                        resetEncoders();
+                        rotateRight(857, -0.2); //30 degrees
 
-                        targetPosition = 857; //30 degrees
-                        power = 0.2;
+                        driveForeward(5268, -0.5); //29.5 inches
 
-                        rotateRight();
+                        rotateLeft(2400, -0.2); //84 degrees
 
-                        resetEncoders();
-
-                        targetPosition = 5268; //29.5 inches
-                        power = 0.5;
-
-                        driveForeward();
-
-                        resetEncoders();
-
-                        targetPosition = 2400; //84 degrees
-                        power = 0.2;
-
-                        rotateLeft();
-
-                        resetEncoders();
-
-                        targetPosition = 3214; //18 inches
-
-                        driveForeward();
+                        driveForeward(3214, -0.5); //18 inches
 
                     } else { //mineralPosition.CENTER or not found
 
                         driveToMarkerAndBack();
 
-                        targetPosition = 6429; //36 inches
-
-                        driveForeward();
+                        driveForeward(6429, 0.5); //36 inches
 
 
 
