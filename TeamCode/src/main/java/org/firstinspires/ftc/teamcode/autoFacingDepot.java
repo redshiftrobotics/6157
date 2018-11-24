@@ -47,8 +47,8 @@ public class autoFacingDepot extends LinearOpMode {
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    int targetPosition = 0;
-    double power = 0;
+//    int targetPosition = 0;
+//    double power = 0;
 
     int leftPosition = leftDrive.getCurrentPosition();
     int rightPosition = rightDrive.getCurrentPosition();
@@ -62,7 +62,8 @@ public class autoFacingDepot extends LinearOpMode {
         }
     }
 
-    public void rotateLeft() {
+    public void rotateLeft(int targetPosition, double power) {
+        resetEncoders();
         leftDrive.setTargetPosition(targetPosition);
         leftDrive.setPower(power);
         rightDrive.setTargetPosition(-targetPosition);
@@ -70,7 +71,8 @@ public class autoFacingDepot extends LinearOpMode {
         waitToFinish();
     }
 
-    public void rotateRight() {
+    public void rotateRight(int targetPosition, double power) {
+        resetEncoders();
         leftDrive.setTargetPosition(-targetPosition);
         leftDrive.setPower(power);
         leftDrive.setTargetPosition(targetPosition);
@@ -78,7 +80,8 @@ public class autoFacingDepot extends LinearOpMode {
         waitToFinish();
     }
 
-    public void driveForeward() {
+    public void driveForeward(int targetPosition, double power) {
+        resetEncoders();
         leftDrive.setTargetPosition(targetPosition);
         leftDrive.setPower(power);
         rightDrive.setTargetPosition(targetPosition);
@@ -171,116 +174,45 @@ public class autoFacingDepot extends LinearOpMode {
 
                     if (position == MineralPosition.LEFT) {
 
-                        resetEncoders();
+                        rotateLeft(857, -0.2); //30 degrees
 
-                        targetPosition = 857; //30 degrees
-                        power = -0.2;
+                        driveForeward(7858, -0.5); //44 inches
 
-                        rotateLeft();
+                        rotateRight(2114, -0.2); //74 inches
 
-                        resetEncoders();
-
-                        targetPosition = 7858; //44 inches
-                        power = -0.5;
-
-                        driveForeward();
-
-                        resetEncoders();
-
-                        targetPosition = 2114;  //74 degrees
-                        power = -0.2;
-
-                        rotateRight();
-
-                        resetEncoders();
-
-                        targetPosition = 5446; //30.5 inches
-                        power = -0.5;
-
-                        driveForeward();
+                        driveForeward(5446, -0.5); //30.5 inches
 
                         //placeTeamMarker();
 
-                        resetEncoders();
-
-                        targetPosition = 15089; //84.5 inches
-                        power = 0.75;
-                        //power positive to make robot move backwards
-
-                        driveForeward();
+                        driveForeward(15089, 0.75); //84.5 inches, power positive to indicate reverse
 
 
                     } else if (position == MineralPosition.RIGHT) {
 
-                        resetEncoders();
+                        rotateRight(857, -0.2); //30 degrees
 
-                        targetPosition = 857; //30 degrees
-                        power = -0.2;
+                        driveForeward(7858, -0.5); //44 inches
 
-                        rotateRight();
+                        rotateLeft(2114, -0.2); //74 degrees
 
-                        resetEncoders();
-
-                        targetPosition = 7858; //44 inches
-                        power = -0.5;
-
-                        driveForeward();
-
-                        resetEncoders();
-
-                        targetPosition = 2114;  //74 degrees
-                        power = -0.2;
-
-                        rotateLeft();
-
-                        resetEncoders();
-
-                        targetPosition = 5446; //30.5 inches
-                        power = -0.5;
-
-                        driveForeward();
+                        driveForeward(5446, -0.5); //30.5 inches
 
                         //placeTeamMarker();
 
-                        resetEncoders();
+                        rotateLeft(2571, -0.2); //90 degrees
 
-                        targetPosition = 2571; //90 degrees
-                        power = -0.2;
-
-                        rotateLeft();
-
-                        resetEncoders();
-
-                        targetPosition = 15089; //84.5 inches
-                        power = -0.75;
-
-                        driveForeward();
+                        driveForeward(15089, -0.75); //84.5 inches
 
 
                     } else { //mineralPosition.CENTER or not found
 
-                        resetEncoders();
-
-                        targetPosition = 10714; //60 inches
-                        power = -0.5;
-
-                        driveForeward();
+                        driveForeward(10714, -0.5); //60 inches
 
                         //placeTeamMarker():
 
-                        resetEncoders();
+                        rotateLeft(3857, -0.2); //137 degrees
 
-                        targetPosition = 3857; //137 degrees
-                        power = -0.2;
-
-                        rotateLeft();
-
-                        resetEncoders();
-
-                        targetPosition = 15089; //84.5 inches
-                        power = -0.75;
-
-                        driveForeward();
+                        driveForeward(15089, -0.75); //84.5 inches
 
                     }
 
