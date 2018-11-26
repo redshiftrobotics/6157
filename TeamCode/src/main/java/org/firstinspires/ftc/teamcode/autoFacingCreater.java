@@ -12,9 +12,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-    //I think I know why this is breaking
+    //Cannot resolve symbol 'tfod' -- Could be fixed by; updating to 4.3, checking for presence of tfod library and adding if needed.
 
-@Autonomous(name = "Autonomous One", group = "Things")
+@Autonomous(name = "Autonomous Crater", group = "Things")
 // @Disabled
 public class autoFacingCreater extends LinearOpMode {
 
@@ -31,7 +31,7 @@ public class autoFacingCreater extends LinearOpMode {
 
     private TFObjectDetector tfod;
 
-    private org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition position;
+    private MineralPosition position;
 
     enum MineralPosition {
 
