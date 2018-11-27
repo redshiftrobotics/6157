@@ -46,14 +46,17 @@ public class autoFacingCreater extends LinearOpMode {
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
-    int leftPosition = leftDrive.getCurrentPosition();
-    int rightPosition = rightDrive.getCurrentPosition();
+
+//        int leftPosition = leftDrive.getCurrentPosition();
+//        int rightPosition = rightDrive.getCurrentPosition();
+
+
 
     public void waitToFinish() {
         while (opModeIsActive() && (leftDrive.isBusy() || rightDrive.isBusy())) {
-            telemetry.addData("Left Encoder Position", leftPosition);
-            telemetry.addData("Right Encoder Position", rightPosition);
-            telemetry.update();
+//            telemetry.addData("Left Encoder Position", leftPosition);
+//            telemetry.addData("Right Encoder Position", rightPosition);
+//            telemetry.update();
             idle();
         }
     }
