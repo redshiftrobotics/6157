@@ -88,25 +88,25 @@ public class autoFacingCreater extends LinearOpMode {
         waitToFinish();
     }
 
-    public void driveToMarkerAndBack() {
+    public void driveToMarkerAndBack() {//* = using calculated values
 
-        rotateLeft(1714, -0.2); //60 degrees
+        rotateLeft(1272, -0.2); //*60 degrees
 
-        driveForeward(7679, -0.5); //43 inches
+        driveForeward(7665, -0.5); //*43 inches
 
-        rotateLeft(2143, -0.2); //75 degrees
+        rotateLeft(1590, -0.2); //*75 degrees
 
-        driveForeward(11786, -0.75); //66 inches
+        driveForeward(11764, -0.75); //*66 inches
 
         //placeTeamMarker():
 
-        driveForeward(11786, 0.75); //66 inches, power is positive to indicate reverse
+        driveForeward(11764, 0.75); //*66 inches, power is positive to indicate reverse
 
-        rotateRight(2143, -0.2); //75 degrees
+        rotateRight(1590, -0.2); //*75 degrees
 
-        driveForeward(7679, 0.5); //43 inches, power is positive to indicate reverse
+        driveForeward(7665, 0.5); //*43 inches, power is positive to indicate reverse
 
-        rotateRight(1714, -0.2); //60 degrees
+        rotateRight(1272, -0.2); //*60 degrees
     }
 
 
@@ -196,32 +196,32 @@ public class autoFacingCreater extends LinearOpMode {
 
                         driveToMarkerAndBack();
 
-                        rotateLeft(857, -0.2); //30 degrees
+                        rotateLeft(636, -0.2); //*30 degrees
 
-                        driveForeward(5268, -0.5); //29.5 inches
+                        driveForeward(5258, -0.5); //*29.5 inches
 
-                        rotateRight(2400, -0.2); //84 degrees
+                        rotateRight(1780, -0.2); //*84 degrees
 
-                        driveForeward(3214, 0.5); //18 inches
+                        driveForeward(3208, 0.5); //*18 inches
 
 
                     } else if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT) {
 
                         driveToMarkerAndBack();
 
-                        rotateRight(857, -0.2); //30 degrees
+                        rotateRight(636, -0.2); //*30 degrees
 
-                        driveForeward(5268, -0.5); //29.5 inches
+                        driveForeward(5258, -0.5); //*29.5 inches
 
-                        rotateLeft(2400, -0.2); //84 degrees
+                        rotateLeft(1780, -0.2); //*84 degrees
 
-                        driveForeward(3214, -0.5); //18 inches
+                        driveForeward(3208, -0.5); //*18 inches
 
                     } else { //mineralPosition.CENTER or not found
 
                         driveToMarkerAndBack();
 
-                        driveForeward(6429, 0.5); //36 inches
+                        driveForeward(6417, 0.5); //*36 inches
 
 
 

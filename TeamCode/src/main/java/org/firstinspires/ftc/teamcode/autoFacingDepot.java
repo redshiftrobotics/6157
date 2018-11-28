@@ -174,45 +174,45 @@ public class autoFacingDepot extends LinearOpMode {
 
                     if (position == MineralPosition.LEFT) {
 
-                        rotateLeft(857, -0.2); //30 degrees
+                        rotateLeft(636, -0.2); //30 degrees
 
-                        driveForeward(7858, -0.5); //44 inches
+                        driveForeward(7843, -0.5); //44 inches
 
-                        rotateRight(2114, -0.2); //74 inches
+                        rotateRight(1568, -0.2); //74 degrees
 
-                        driveForeward(5446, -0.5); //30.5 inches
+                        driveForeward(5437, -0.5); //30.5 inches
 
                         //placeTeamMarker();
 
-                        driveForeward(15089, 0.75); //84.5 inches, power positive to indicate reverse
+                        driveForeward(15062, 0.75); //84.5 inches, power positive to indicate reverse
 
 
                     } else if (position == MineralPosition.RIGHT) {
 
-                        rotateRight(857, -0.2); //30 degrees
+                        rotateRight(636, -0.2); //30 degrees
 
-                        driveForeward(7858, -0.5); //44 inches
+                        driveForeward(7843, -0.5); //44 inches
 
-                        rotateLeft(2114, -0.2); //74 degrees
+                        rotateLeft(1568, -0.2); //74 degrees
 
-                        driveForeward(5446, -0.5); //30.5 inches
+                        driveForeward(5437, -0.5); //30.5 inches
 
                         //placeTeamMarker();
 
-                        rotateLeft(2571, -0.2); //90 degrees
+                        rotateLeft(1907, -0.2); //90 degrees
 
-                        driveForeward(15089, -0.75); //84.5 inches
+                        driveForeward(15062, -0.75); //84.5 inches
 
 
                     } else { //mineralPosition.CENTER or not found
 
-                        driveForeward(10714, -0.5); //60 inches
+                        driveForeward(10695, -0.5); //60 inches
 
                         //placeTeamMarker():
 
-                        rotateLeft(3857, -0.2); //137 degrees
+                        rotateLeft(2904, -0.2); //137 degrees
 
-                        driveForeward(15089, -0.75); //84.5 inches
+                        driveForeward(15062, -0.75); //84.5 inches
 
                     }
 
