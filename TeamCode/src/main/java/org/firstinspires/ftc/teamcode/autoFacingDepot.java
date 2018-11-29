@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.sun.tools.javac.util.Position;
 import java.util.List;
@@ -21,6 +22,7 @@ public class autoFacingDepot extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
+    Servo servo;
 
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -36,7 +38,7 @@ public class autoFacingDepot extends LinearOpMode {
 
     enum MineralPosition {
 
-        CENTER, LEFT, RIGHT
+        CENTER, LEFT, RIGHT //NOTFOUND
 
     }
 
@@ -60,6 +62,10 @@ public class autoFacingDepot extends LinearOpMode {
 //            telemetry.update();
             idle();
         }
+    }
+
+    public void placeTeamMarker() {
+        servo.setPosition(180);
     }
 
     public void rotateLeft(int targetPosition, double power) {
@@ -122,6 +128,8 @@ public class autoFacingDepot extends LinearOpMode {
         telemetry.addLine("Done.");
         telemetry.update();
 
+        int ranVuforia = 0;
+
         waitForStart();
 
         if (opModeIsActive()) {
@@ -163,7 +171,7 @@ public class autoFacingDepot extends LinearOpMode {
                             }
                             if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
                                 if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
-                                    telemetry.addData("Gold Mineral Position", "Left");
+                                    telemetry.addData("Gold Mineral Position", "Left");//not working for some reason
                                     position = MineralPosition.LEFT;
                                 } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
                                     telemetry.addData("Gold Mineral Position", "Right");
@@ -172,19 +180,30 @@ public class autoFacingDepot extends LinearOpMode {
                                     telemetry.addData("Gold Mineral Position", "Center");
                                     position = MineralPosition.CENTER;
                                 } else {
-                                    telemetry.addLine("More objects needed to identify position.");
+                                    telemetry.addLine("Found 3+ objects, but could not determine position.");
+//                                    position = MineralPosition.NOTFOUND;
                                 }
                                 telemetry.addData("X-position & Width", goldMineralX + " " + goldMineralWidth);
                             }
+                        } else {
+                            telemetry.addLine("Did not identify 3 or more objects.");
                         }
+                        ranVuforia ++;
+                        telemetry.addData("Vuforia ran", ranVuforia);
                         telemetry.update();
                     }
+
+
+//                    telemetry.addLine("we have liftoff");
+//                    telemetry.update();
 
 
 
 
 
                     if (position == MineralPosition.LEFT) {
+                        telemetry.addData("Executing: Gold Mineral Position", "Left");
+                        telemetry.update();
 
                         rotateLeft(636, -0.2); //30 degrees
 
@@ -194,12 +213,14 @@ public class autoFacingDepot extends LinearOpMode {
 
                         driveForeward(5437, -0.5); //30.5 inches
 
-                        //placeTeamMarker();
+                        placeTeamMarker();
 
                         driveForeward(15062, 0.75); //84.5 inches, power positive to indicate reverse
 
 
                     } else if (position == MineralPosition.RIGHT) {
+                        telemetry.addData("Executing: Gold Mineral Position", "Right");
+                        telemetry.update();
 
                         rotateRight(636, -0.2); //30 degrees
 
@@ -209,23 +230,35 @@ public class autoFacingDepot extends LinearOpMode {
 
                         driveForeward(5437, -0.5); //30.5 inches
 
-                        //placeTeamMarker();
+                        placeTeamMarker();
 
                         rotateLeft(1907, -0.2); //90 degrees
 
                         driveForeward(15062, -0.75); //84.5 inches
 
 
-                    } else { //mineralPosition.CENTER or not found
+                    } else if (position == MineralPosition.CENTER) {
+                        telemetry.addData("Executing: Gold Mineral Position", "Center");
+                        telemetry.update();
 
                         driveForeward(10695, -0.5); //60 inches
 
-                        //placeTeamMarker():
+                        placeTeamMarker();
 
                         rotateLeft(2904, -0.2); //137 degrees
 
                         driveForeward(15062, -0.75); //84.5 inches
 
+                    } else if (position == MineralPosition.NOTFOUND) {
+                        telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
+                        telemetry.update();
+                        driveForeward(10695, -0.5); //60 inches
+
+                        placeTeamMarker();
+
+                        rotateLeft(2904, -0.2); //137 degrees
+
+                        driveForeward(15062, -0.75); //84.5 inches
                     }
 
 
