@@ -65,7 +65,7 @@ public class autoFacingDepot extends LinearOpMode {
     }
 
     public void placeTeamMarker() {
-        servo.setPosition(180);
+        //servo.setPosition(180); Having issues with this - come back later
     }
 
     public void rotateLeft(int targetPosition, double power) {
@@ -81,8 +81,8 @@ public class autoFacingDepot extends LinearOpMode {
         resetEncoders();
         leftDrive.setTargetPosition(-targetPosition);
         leftDrive.setPower(power);
-        leftDrive.setTargetPosition(targetPosition);
-        leftDrive.setPower(power);
+        rightDrive.setTargetPosition(targetPosition);
+        rightDrive.setPower(power);
         waitToFinish();
     }
 
@@ -201,11 +201,11 @@ public class autoFacingDepot extends LinearOpMode {
 
 
 
-                    if (position == MineralPosition.LEFT) {
+                    if (position == MineralPosition.LEFT) {//left's current tune: needs improvement
                         telemetry.addData("Executing: Gold Mineral Position", "Left");
                         telemetry.update();
 
-                        rotateLeft(636, -0.2); //30 degrees
+                        rotateRight(636, -0.2); //30 degrees
 
                         driveForeward(7843, -0.5); //44 inches
 
@@ -218,11 +218,11 @@ public class autoFacingDepot extends LinearOpMode {
                         driveForeward(15062, 0.75); //84.5 inches, power positive to indicate reverse
 
 
-                    } else if (position == MineralPosition.RIGHT) {
+                    } else if (position == MineralPosition.RIGHT) {//right's current tune: needs improvement
                         telemetry.addData("Executing: Gold Mineral Position", "Right");
                         telemetry.update();
 
-                        rotateRight(636, -0.2); //30 degrees
+                        rotateLeft(636, -0.2); //30 degrees
 
                         driveForeward(7843, -0.5); //44 inches
 
@@ -237,19 +237,24 @@ public class autoFacingDepot extends LinearOpMode {
                         driveForeward(15062, -0.75); //84.5 inches
 
 
-                    } else if (position == MineralPosition.CENTER) {
+                    } else if (position == MineralPosition.CENTER) {//center's current tune: good enough!
                         telemetry.addData("Executing: Gold Mineral Position", "Center");
                         telemetry.update();
 
-                        driveForeward(10695, -0.5); //60 inches
+                        driveForeward(10800, -0.5); //60 inches (greater)
 
                         placeTeamMarker();
+                        driveForeward(100, 0.5);
 
-                        rotateLeft(2904, -0.2); //137 degrees
+                        rotateRight(2754, -0.2); //137 degrees (needed to be greater)
 
-                        driveForeward(15062, -0.75); //84.5 inches
+                        driveForeward(5062, -0.75); //84.5 inches
 
-                    } else if (position == MineralPosition.NOTFOUND) {
+                        rotateRight(500, -0.2);
+
+                        driveForeward(10000, -0.75);
+
+                    } else if (ranVuforia == 40) {//abusing the vuforia loop counter as a timer
                         telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
                         telemetry.update();
                         driveForeward(10695, -0.5); //60 inches

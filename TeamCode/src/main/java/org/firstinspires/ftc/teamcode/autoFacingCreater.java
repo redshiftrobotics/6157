@@ -74,8 +74,8 @@ public class autoFacingCreater extends LinearOpMode {
         resetEncoders();
         leftDrive.setTargetPosition(-targetPosition);
         leftDrive.setPower(power);
-        leftDrive.setTargetPosition(targetPosition);
-        leftDrive.setPower(power);
+        rightDrive.setTargetPosition(targetPosition);
+        rightDrive.setPower(power);
         waitToFinish();
     }
 
