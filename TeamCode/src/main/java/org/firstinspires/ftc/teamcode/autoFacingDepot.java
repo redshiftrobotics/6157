@@ -65,7 +65,7 @@ public class autoFacingDepot extends LinearOpMode {
     }
 
     public void placeTeamMarker() {
-        //servo.setPosition(180); Having issues with this - come back later
+        servo.setPosition(0.5);
     }
 
     public void rotateLeft(int targetPosition, double power) {
@@ -112,6 +112,7 @@ public class autoFacingDepot extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
+        this.servo = hardwareMap.servo.get("servo");
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -244,7 +245,7 @@ public class autoFacingDepot extends LinearOpMode {
                         driveForeward(10800, -0.5); //60 inches (greater)
 
                         placeTeamMarker();
-                        driveForeward(100, 0.5);
+                        driveForeward(350, 0.5);
 
                         rotateRight(2754, -0.2); //137 degrees (needed to be greater)
 

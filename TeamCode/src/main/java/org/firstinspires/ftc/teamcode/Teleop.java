@@ -10,6 +10,7 @@ public class Teleop extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
+    DcMotor liftDrive;
 
 //    DcMotor armLiftBottomA;
 //    DcMotor armLiftBottomB;
@@ -25,6 +26,7 @@ public class Teleop extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
+        this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
 
         this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -43,6 +45,7 @@ public class Teleop extends LinearOpMode {
         while (opModeIsActive()) {
             this.leftDrive.setPower(gamepad1.left_stick_y);
             this.rightDrive.setPower(gamepad1.right_stick_y);
+            this.liftDrive.setPower(gamepad2.right_stick_y);
 
 //            this.armLiftBottomA.setPower(gamepad2.left_stick_y);
 //            this.armLiftBottomB.setPower(gamepad2.left_stick_y);
