@@ -86,7 +86,7 @@ public class autoFacingCreater extends LinearOpMode {
                 tfod.activate();
             }
 
-            methodyShit.dropDown();
+            //methodyShit.dropDown();
 
             while (opModeIsActive()) {
 
