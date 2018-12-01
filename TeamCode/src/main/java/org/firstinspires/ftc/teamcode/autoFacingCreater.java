@@ -20,6 +20,7 @@ public class autoFacingCreater extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
+    DcMotor liftDrive;
 
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -58,11 +59,13 @@ public class autoFacingCreater extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
+        this.rightDrive = hardwareMap.dcMotor.get("lift_drive");
         this.methodyShit = new MethodyShit(hardwareMap);
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         initVuforia();
 
@@ -82,6 +85,8 @@ public class autoFacingCreater extends LinearOpMode {
             if (tfod != null) {
                 tfod.activate();
             }
+
+            methodyShit.dropDown();
 
             while (opModeIsActive()) {
 

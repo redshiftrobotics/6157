@@ -26,7 +26,7 @@ public class Teleop extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
-        this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
+        this.liftDrive = hardwareMap.dcMotor.get("lift_drive");//thanks for this name
 
         this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
