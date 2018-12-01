@@ -160,63 +160,63 @@ public class autoFacingDepot extends LinearOpMode {
 
                         methodyShit.rotateRight(636, -0.2); //30 degrees
 
-                        driveForeward(7843, -0.5); //44 inches
+                        methodyShit.driveForeward(7843, -0.5); //44 inches
 
-                        rotateRight(1568, -0.2); //74 degrees
+                        methodyShit.rotateRight(1568, -0.2); //74 degrees
 
-                        driveForeward(5437, -0.5); //30.5 inches
+                        methodyShit.driveForeward(5437, -0.5); //30.5 inches
 
-                        placeTeamMarker();
+                        methodyShit.placeTeamMarker();
 
-                        driveForeward(15062, 0.75); //84.5 inches, power positive to indicate reverse
+                        methodyShit.driveForeward(15062, 0.75); //84.5 inches, power positive to indicate reverse
 
 
                     } else if (position == MineralPosition.RIGHT) {//right's current tune: needs improvement
                         telemetry.addData("Executing: Gold Mineral Position", "Right");
                         telemetry.update();
 
-                        rotateLeft(636, -0.2); //30 degrees
+                        methodyShit.rotateLeft(636, -0.2); //30 degrees
 
-                        driveForeward(7843, -0.5); //44 inches
+                        methodyShit.driveForeward(7843, -0.5); //44 inches
 
-                        rotateLeft(1568, -0.2); //74 degrees
+                        methodyShit.rotateLeft(1568, -0.2); //74 degrees
 
-                        driveForeward(5437, -0.5); //30.5 inches
+                        methodyShit.driveForeward(5437, -0.5); //30.5 inches
 
-                        placeTeamMarker();
+                        methodyShit.placeTeamMarker();
 
-                        rotateLeft(1907, -0.2); //90 degrees
+                        methodyShit.rotateLeft(1907, -0.2); //90 degrees
 
-                        driveForeward(15062, -0.75); //84.5 inches
+                        methodyShit.driveForeward(15062, -0.75); //84.5 inches
 
 
                     } else if (position == MineralPosition.CENTER) {//center's current tune: good enough!
                         telemetry.addData("Executing: Gold Mineral Position", "Center");
                         telemetry.update();
 
-                        driveForeward(10800, -0.5); //60 inches (greater)
+                        methodyShit.driveForeward(10800, -0.5); //60 inches (greater)
 
-                        placeTeamMarker();
-                        driveForeward(350, 0.5);
+                        methodyShit.placeTeamMarker();
+                        methodyShit.driveForeward(350, 0.5);
 
-                        rotateRight(2754, -0.2); //137 degrees (needed to be greater)
+                        methodyShit.rotateRight(2754, -0.2); //137 degrees (needed to be greater)
 
-                        driveForeward(5062, -0.75); //84.5 inches
+                        methodyShit.driveForeward(5062, -0.75); //84.5 inches
 
-                        rotateRight(500, -0.2);
+                        methodyShit.rotateRight(500, -0.2);
 
-                        driveForeward(10000, -0.75);
+                        methodyShit.driveForeward(10000, -0.75);
 
                     } else if (ranVuforia == 40) {//abusing the vuforia loop counter as a timer
                         telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
                         telemetry.update();
-                        driveForeward(10695, -0.5); //60 inches
+                        methodyShit.driveForeward(10695, -0.5); //60 inches
 
-                        placeTeamMarker();
+                        methodyShit.placeTeamMarker();
 
-                        rotateLeft(2904, -0.2); //137 degrees
+                        methodyShit.rotateLeft(2904, -0.2); //137 degrees
 
-                        driveForeward(15062, -0.75); //84.5 inches
+                        methodyShit.driveForeward(15062, -0.75); //84.5 inches
                     }
 
 

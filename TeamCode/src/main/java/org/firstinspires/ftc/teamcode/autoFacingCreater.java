@@ -39,6 +39,8 @@ public class autoFacingCreater extends LinearOpMode {
 
     }
 
+    MethodyShit methodyShit;
+
 
 
 
@@ -56,6 +58,7 @@ public class autoFacingCreater extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
+        this.methodyShit = new MethodyShit(hardwareMap);
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -124,34 +127,34 @@ public class autoFacingCreater extends LinearOpMode {
 
                     if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.LEFT) {
 
-                        MethodyShit.driveToMarkerAndBack();
+                        methodyShit.driveToMarkerAndBack();
 
-                        rotateLeft(636, -0.2); //*30 degrees
+                        methodyShit.rotateLeft(636, -0.2); //*30 degrees
 
-                        driveForeward(5258, -0.5); //*29.5 inches
+                        methodyShit.driveForeward(5258, -0.5); //*29.5 inches
 
-                        rotateRight(1780, -0.2); //*84 degrees
+                        methodyShit.rotateRight(1780, -0.2); //*84 degrees
 
-                        driveForeward(3208, 0.5); //*18 inches
+                        methodyShit.driveForeward(3208, 0.5); //*18 inches
 
 
                     } else if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT) {
 
-                        driveToMarkerAndBack();
+                        methodyShit.driveToMarkerAndBack();
 
-                        rotateRight(636, -0.2); //*30 degrees
+                        methodyShit.rotateRight(636, -0.2); //*30 degrees
 
-                        driveForeward(5258, -0.5); //*29.5 inches
+                        methodyShit.driveForeward(5258, -0.5); //*29.5 inches
 
-                        rotateLeft(1780, -0.2); //*84 degrees
+                        methodyShit.rotateLeft(1780, -0.2); //*84 degrees
 
-                        driveForeward(3208, -0.5); //*18 inches
+                        methodyShit.driveForeward(3208, -0.5); //*18 inches
 
                     } else { //mineralPosition.CENTER or not found
 
-                        driveToMarkerAndBack();
+                        methodyShit.driveToMarkerAndBack();
 
-                        driveForeward(6417, 0.5); //*36 inches
+                        methodyShit.driveForeward(6417, 0.5); //*36 inches
 
 
 
