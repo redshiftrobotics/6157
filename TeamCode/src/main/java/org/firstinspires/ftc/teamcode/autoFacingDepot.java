@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.sun.tools.javac.util.Position;
+
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
@@ -23,6 +23,7 @@ public class autoFacingDepot extends LinearOpMode {
     DcMotor leftDrive;
     DcMotor rightDrive;
     Servo servo;
+    DcMotor liftDrive;
 
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -42,58 +43,7 @@ public class autoFacingDepot extends LinearOpMode {
 
     }
 
-    public void resetEncoders() {
-        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    }
-
-//    int targetPosition = 0;
-//    double power = 0;
-
-//    int leftPosition = leftDrive.getCurrentPosition();
-//    int rightPosition = rightDrive.getCurrentPosition();
-
-    public void waitToFinish() {
-        while (opModeIsActive() && (leftDrive.isBusy() || rightDrive.isBusy())) {
-//            telemetry.addData("Left Encoder Position", leftPosition);
-//            telemetry.addData("Right Encoder Position", rightPosition);
-//            telemetry.update();
-            idle();
-        }
-    }
-
-    public void placeTeamMarker() {
-        servo.setPosition(0.5);
-    }
-
-    public void rotateLeft(int targetPosition, double power) {
-        resetEncoders();
-        leftDrive.setTargetPosition(targetPosition);
-        leftDrive.setPower(power);
-        rightDrive.setTargetPosition(-targetPosition);
-        rightDrive.setPower(power);
-        waitToFinish();
-    }
-
-    public void rotateRight(int targetPosition, double power) {
-        resetEncoders();
-        leftDrive.setTargetPosition(-targetPosition);
-        leftDrive.setPower(power);
-        rightDrive.setTargetPosition(targetPosition);
-        rightDrive.setPower(power);
-        waitToFinish();
-    }
-
-    public void driveForeward(int targetPosition, double power) {
-        resetEncoders();
-        leftDrive.setTargetPosition(targetPosition);
-        leftDrive.setPower(power);
-        rightDrive.setTargetPosition(targetPosition);
-        rightDrive.setPower(power);
-        waitToFinish();
-    }
+    MethodyShit methodyShit;
 
 
 
@@ -113,6 +63,8 @@ public class autoFacingDepot extends LinearOpMode {
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
         this.servo = hardwareMap.servo.get("servo");
+        this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
+        this.methodyShit = new MethodyShit(hardwareMap);
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -206,7 +158,7 @@ public class autoFacingDepot extends LinearOpMode {
                         telemetry.addData("Executing: Gold Mineral Position", "Left");
                         telemetry.update();
 
-                        rotateRight(636, -0.2); //30 degrees
+                        methodyShit.rotateRight(636, -0.2); //30 degrees
 
                         driveForeward(7843, -0.5); //44 inches
 
