@@ -82,7 +82,7 @@ public class MethodyShit {
 
         driveForeward(11764, -0.75); //*66 inches
 
-        //placeTeamMarker():
+        placeTeamMarker();
 
         driveForeward(11764, 0.75); //*66 inches, power is positive to indicate reverse
 
