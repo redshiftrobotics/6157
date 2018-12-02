@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -19,6 +20,11 @@ public class MethodyShit {
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
         this.servo = hardwareMap.servo.get("servo");
         this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
+
+        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     public void resetEncoders() {
@@ -95,17 +101,18 @@ public class MethodyShit {
         rotateRight(1272, -0.2); //*60 degrees
     }
 
-    public void walkThePlank() throws InterruptedException {
+    public void descendTheMast() throws InterruptedException {
         liftDrive.setPower(-1);
         Thread.sleep(10000);
         liftDrive.setPower(0);
         driveForeward(1069, 1); //.5 inches, power positive to indicate reverse
-        rotateLeft(954, -1); //45 degrees
-        driveForeward(1069, -1); //.5 inches, power positive to indicate reverse
-        rotateLeft(954, -1); //45 degrees
-        driveForeward(1069, -1); //.5 inches, power positive to indicate reverse
     }
 
-
+    public void walkThePlank() {
+        rotateLeft(954, -1); //45 degrees
+        driveForeward(1069, -1); //.5 inches
+        rotateLeft(954, -1); //45 degrees
+        driveForeward(1069, 1); //.5 inches, power positive to indicate reverse
+    }
 
 }

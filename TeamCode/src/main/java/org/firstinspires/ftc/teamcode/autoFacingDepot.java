@@ -91,6 +91,7 @@ public class autoFacingDepot extends LinearOpMode {
             if (tfod != null) {
                 tfod.activate();
             }
+            methodyShit.descendTheMast();
 
             while (opModeIsActive()) {
 
@@ -213,7 +214,7 @@ public class autoFacingDepot extends LinearOpMode {
 
                         methodyShit.driveForeward(10000, -0.75);
 
-                    } else if (ranVuforia == 40) {//abusing the vuforia loop counter as a timer
+                    } else if (ranVuforia == 27) {//abusing the vuforia loop counter as a timer
                         telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
                         telemetry.update();
                         methodyShit.walkThePlank();

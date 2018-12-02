@@ -95,6 +95,7 @@ public class autoFacingCreater extends LinearOpMode {
             //methodyShit.dropDown();
 
             while (opModeIsActive()) {
+                methodyShit.descendTheMast();
 
 
                 if (tfod != null) {
@@ -195,7 +196,7 @@ public class autoFacingCreater extends LinearOpMode {
 
 
 
-                    } else if (ranVuforia == 40) {
+                    } else if (ranVuforia == 27) {
                         telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
                         telemetry.update();
                         methodyShit.walkThePlank();
