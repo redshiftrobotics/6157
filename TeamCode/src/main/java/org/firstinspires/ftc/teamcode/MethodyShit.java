@@ -15,6 +15,10 @@ public class MethodyShit {
 
     public MethodyShit(HardwareMap hardwareMap){
         this.hardwareMap = hardwareMap;
+        this.leftDrive = hardwareMap.dcMotor.get("left_drive");
+        this.rightDrive = hardwareMap.dcMotor.get("right_drive");
+        this.servo = hardwareMap.servo.get("servo");
+        this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
     }
 
     public void resetEncoders() {
