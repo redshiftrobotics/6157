@@ -161,13 +161,13 @@ public class autoFacingCreater extends LinearOpMode {
 
                         methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.rotateLeft(636, -0.2); //*30 degrees
+                        methodyShit.rotateLeft(636, -1); //*30 degrees
 
-                        methodyShit.driveForeward(5258, -0.5); //*29.5 inches
+                        methodyShit.driveForeward(5258, -1); //*29.5 inches
 
-                        methodyShit.rotateRight(1780, -0.2); //*84 degrees
+                        methodyShit.rotateRight(1780, -1); //*84 degrees
 
-                        methodyShit.driveForeward(3208, 0.5); //*18 inches
+                        methodyShit.driveForeward(3208, 1); //*18 inches
 
 
                     } else if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT) {
@@ -177,13 +177,13 @@ public class autoFacingCreater extends LinearOpMode {
 
                         methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.rotateRight(636, -0.2); //*30 degrees
+                        methodyShit.rotateRight(636, -1); //*30 degrees
 
-                        methodyShit.driveForeward(5258, -0.5); //*29.5 inches
+                        methodyShit.driveForeward(5258, -1); //*29.5 inches
 
-                        methodyShit.rotateLeft(1780, -0.2); //*84 degrees
+                        methodyShit.rotateLeft(1780, -1); //*84 degrees
 
-                        methodyShit.driveForeward(3208, -0.5); //*18 inches
+                        methodyShit.driveForeward(3208, -1); //*18 inches
 
                     } else if (position == MineralPosition.CENTER) { //mineralPosition.CENTER or not found
                         telemetry.addData("Executing: Gold Mineral Position", "Center");
@@ -192,7 +192,7 @@ public class autoFacingCreater extends LinearOpMode {
 
                         methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.driveForeward(6417, 0.5); //*36 inches
+                        methodyShit.driveForeward(6417, 1); //*36 inches
 
 
 
@@ -202,7 +202,7 @@ public class autoFacingCreater extends LinearOpMode {
                         methodyShit.walkThePlank();
                         methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.driveForeward(6417, 0.5); //*36 inches
+                        methodyShit.driveForeward(6417, 1); //*36 inches
 
                     }
 

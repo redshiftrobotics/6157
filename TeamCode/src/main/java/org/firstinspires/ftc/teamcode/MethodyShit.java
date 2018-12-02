@@ -82,23 +82,23 @@ public class MethodyShit {
 
     public void driveToMarkerAndBack() {//* = using calculated values
 
-        rotateLeft(1272, -0.2); //*60 degrees
+        rotateLeft(1272, -1); //*60 degrees
 
-        driveForeward(7665, -0.5); //*43 inches
+        driveForeward(7665, -1); //*43 inches
 
-        rotateLeft(1590, -0.2); //*75 degrees
+        rotateLeft(1590, -1); //*75 degrees
 
-        driveForeward(11764, -0.75); //*66 inches
+        driveForeward(11764, -1); //*66 inches
 
         placeTeamMarker();
 
-        driveForeward(11764, 0.75); //*66 inches, power is positive to indicate reverse
+        driveForeward(11764, 1); //*66 inches, power is positive to indicate reverse
 
-        rotateRight(1590, -0.2); //*75 degrees
+        rotateRight(1590, -1); //*75 degrees
 
-        driveForeward(7665, 0.5); //*43 inches, power is positive to indicate reverse
+        driveForeward(7665, 1); //*43 inches, power is positive to indicate reverse
 
-        rotateRight(1272, -0.2); //*60 degrees
+        rotateRight(1272, -1); //*60 degrees
     }
 
     public void descendTheMast() throws InterruptedException {
