@@ -26,8 +26,6 @@ public class MethodyShit {
         rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        liftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
 //    int targetPosition = 0;
@@ -95,6 +93,16 @@ public class MethodyShit {
         driveForeward(7665, 0.5); //*43 inches, power is positive to indicate reverse
 
         rotateRight(1272, -0.2); //*60 degrees
+    }
+
+    public void walkThePlank() throws InterruptedException {
+        liftDrive.setPower(-1);
+        Thread.sleep(10000);
+        driveForeward(1069, 0.5); //.5 inches, power positive to indicate reverse
+        rotateLeft(954, -0.5); //45 degrees
+        driveForeward(1069, -0.5); //.5 inches, power positive to indicate reverse
+        rotateLeft(954, -0.5); //45 degrees
+        driveForeward(1069, -0.5); //.5 inches, power positive to indicate reverse
     }
 
 
