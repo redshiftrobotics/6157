@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.util.List;
@@ -14,12 +15,14 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
     //Cannot resolve symbol 'tfod' -- Could be fixed by; updating to 4.3, checking for presence of tfod library and adding if needed.
 
+
 @Autonomous(name = "Autonomous Crater", group = "Things")
 // @Disabled
 public class autoFacingCreater extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
+    Servo servo;
     DcMotor liftDrive;
 
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
@@ -50,7 +53,7 @@ public class autoFacingCreater extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
 
@@ -59,7 +62,8 @@ public class autoFacingCreater extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
-        this.rightDrive = hardwareMap.dcMotor.get("lift_drive");
+        this.servo = hardwareMap.servo.get("servo");
+        this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
         this.methodyShit = new MethodyShit(hardwareMap);
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -77,6 +81,8 @@ public class autoFacingCreater extends LinearOpMode {
 
         telemetry.addLine("Done.");
         telemetry.update();
+
+        int ranVuforia = 0;
 
         waitForStart();
 
@@ -97,32 +103,49 @@ public class autoFacingCreater extends LinearOpMode {
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Object Detected", updatedRecognitions.size());
-                        if (updatedRecognitions.size() == 3) {
-                            int goldMineralX = -1;
+                        if (updatedRecognitions.size() >= 3) {//next to do: alter code to be more flexible with more than 3 objects and distinguish starting with size
+                            int goldMineralX = -1; //should these be floats? (for increased accuracy)
+                            int goldMineralWidth = 0; //privatize to scope?
                             int silverMineral1X = -1;
+                            int silverMineral1Width = 0;
                             int silverMineral2X = -1;
-                            for (Recognition recognition : updatedRecognitions) {
-                                if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) {
-                                    goldMineralX = (int) recognition.getLeft();
-                                } else if (silverMineral1X == -1) {
-                                    silverMineral1X = (int) recognition.getLeft();
-                                } else {
-                                    silverMineral2X = (int) recognition.getLeft();
+                            int silverMineral2Width = 0;
+
+                            for (Recognition recognition : updatedRecognitions) {//establishes the width and x position of the widest gold mineral and 2 widest silver minerals
+                                if (recognition.getLabel().equals(LABEL_GOLD_MINERAL) && recognition.getWidth() > goldMineralWidth) {//Compares width to previously identified gold object to identify which is closer (possibly should compare width*height?)
+                                    goldMineralX = (int) recognition.getTop();//Camera is flipped with its top side on the left, so we use .getTop()
+                                    goldMineralWidth = (int) recognition.getWidth();
+                                } else if (recognition.getLabel().equals(LABEL_SILVER_MINERAL) && silverMineral1Width <= recognition.getWidth()) {
+                                    silverMineral2X = silverMineral1X;
+                                    silverMineral2Width = silverMineral1Width;
+                                    silverMineral1X = (int) recognition.getTop();
+                                    silverMineral1Width = (int) recognition.getWidth();
+                                } else if (recognition.getLabel().equals(LABEL_SILVER_MINERAL) && silverMineral2Width <= recognition.getWidth()) {
+                                    silverMineral2X = (int) recognition.getTop();
+                                    silverMineral2Width = (int) recognition.getWidth();
                                 }
                             }
                             if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
                                 if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
-                                    telemetry.addData("Gold Mineral Position", "Left");
-                                    position = org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.LEFT;
+                                    telemetry.addData("Gold Mineral Position", "Left");//not working for some reason
+                                    position = MineralPosition.LEFT;
                                 } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
                                     telemetry.addData("Gold Mineral Position", "Right");
-                                    position = org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT;
-                                } else {
+                                    position = MineralPosition.RIGHT;
+                                } else if ((goldMineralX > silverMineral1X && goldMineralX < silverMineral2X) || (goldMineralX < silverMineral1X && goldMineralX > silverMineral2X)) { //if it is inbetween
                                     telemetry.addData("Gold Mineral Position", "Center");
-                                    position = org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.CENTER;
+                                    position = MineralPosition.CENTER;
+                                } else {
+                                    telemetry.addLine("Found 3+ objects, but could not determine position.");
+//                                    position = MineralPosition.NOTFOUND;
                                 }
+                                telemetry.addData("X-position & Width", goldMineralX + " " + goldMineralWidth);
                             }
+                        } else {
+                            telemetry.addLine("Did not identify 3 or more objects.");
                         }
+                        ranVuforia ++;
+                        telemetry.addData("Vuforia ran", ranVuforia);
                         telemetry.update();
                     }
 
@@ -131,6 +154,9 @@ public class autoFacingCreater extends LinearOpMode {
 
 
                     if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.LEFT) {
+                        telemetry.addData("Executing: Gold Mineral Position", "Left");
+                        telemetry.update();
+                        methodyShit.walkThePlank();
 
                         methodyShit.driveToMarkerAndBack();
 
@@ -144,6 +170,9 @@ public class autoFacingCreater extends LinearOpMode {
 
 
                     } else if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT) {
+                        telemetry.addData("Executing: Gold Mineral Position", "Right");
+                        telemetry.update();
+                        methodyShit.walkThePlank();
 
                         methodyShit.driveToMarkerAndBack();
 
@@ -155,13 +184,24 @@ public class autoFacingCreater extends LinearOpMode {
 
                         methodyShit.driveForeward(3208, -0.5); //*18 inches
 
-                    } else { //mineralPosition.CENTER or not found
+                    } else if (position == MineralPosition.CENTER) { //mineralPosition.CENTER or not found
+                        telemetry.addData("Executing: Gold Mineral Position", "Center");
+                        telemetry.update();
+                        methodyShit.walkThePlank();
 
                         methodyShit.driveToMarkerAndBack();
 
                         methodyShit.driveForeward(6417, 0.5); //*36 inches
 
 
+
+                    } else if (ranVuforia == 40) {
+                        telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
+                        telemetry.update();
+                        methodyShit.walkThePlank();
+                        methodyShit.driveToMarkerAndBack();
+
+                        methodyShit.driveForeward(6417, 0.5); //*36 inches
 
                     }
 

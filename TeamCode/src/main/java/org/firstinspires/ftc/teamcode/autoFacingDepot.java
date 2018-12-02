@@ -53,7 +53,7 @@ public class autoFacingDepot extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
 
@@ -137,6 +137,7 @@ public class autoFacingDepot extends LinearOpMode {
                                     telemetry.addLine("Found 3+ objects, but could not determine position.");
 //                                    position = MineralPosition.NOTFOUND;
                                 }
+
                                 telemetry.addData("X-position & Width", goldMineralX + " " + goldMineralWidth);
                             }
                         } else {
@@ -159,6 +160,8 @@ public class autoFacingDepot extends LinearOpMode {
                         telemetry.addData("Executing: Gold Mineral Position", "Left");
                         telemetry.update();
 
+                        methodyShit.walkThePlank();
+
                         methodyShit.rotateRight(636, -0.2); //30 degrees
 
                         methodyShit.driveForeward(7843, -0.5); //44 inches
@@ -175,6 +178,7 @@ public class autoFacingDepot extends LinearOpMode {
                     } else if (position == MineralPosition.RIGHT) {//right's current tune: needs improvement
                         telemetry.addData("Executing: Gold Mineral Position", "Right");
                         telemetry.update();
+                        methodyShit.walkThePlank();
 
                         methodyShit.rotateLeft(636, -0.2); //30 degrees
 
@@ -194,6 +198,7 @@ public class autoFacingDepot extends LinearOpMode {
                     } else if (position == MineralPosition.CENTER) {//center's current tune: good enough!
                         telemetry.addData("Executing: Gold Mineral Position", "Center");
                         telemetry.update();
+                        methodyShit.walkThePlank();
 
                         methodyShit.driveForeward(10800, -0.5); //60 inches (greater)
 
@@ -211,6 +216,7 @@ public class autoFacingDepot extends LinearOpMode {
                     } else if (ranVuforia == 40) {//abusing the vuforia loop counter as a timer
                         telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
                         telemetry.update();
+                        methodyShit.walkThePlank();
                         methodyShit.driveForeward(10695, -0.5); //60 inches
 
                         methodyShit.placeTeamMarker();

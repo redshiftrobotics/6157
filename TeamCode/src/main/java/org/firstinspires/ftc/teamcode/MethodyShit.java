@@ -98,6 +98,7 @@ public class MethodyShit {
     public void walkThePlank() throws InterruptedException {
         liftDrive.setPower(-1);
         Thread.sleep(10000);
+        liftDrive.setPower(0);
         driveForeward(1069, 1); //.5 inches, power positive to indicate reverse
         rotateLeft(954, -1); //45 degrees
         driveForeward(1069, -1); //.5 inches, power positive to indicate reverse
