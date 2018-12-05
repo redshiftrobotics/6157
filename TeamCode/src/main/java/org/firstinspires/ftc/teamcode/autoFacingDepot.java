@@ -163,17 +163,17 @@ public class autoFacingDepot extends LinearOpMode {
 
                         methodyShit.walkThePlank();
 
-                        methodyShit.rotateRight(636, -1); //30 degrees
+                        methodyShit.rotateRight(636, 1); //30 degrees
 
-                        methodyShit.driveForeward(7843, -1); //44 inches
+                        methodyShit.driveForeward(7843, 1); //44 inches
 
-                        methodyShit.rotateRight(1568, -1); //74 degrees
+                        methodyShit.rotateRight(1568, 1); //74 degrees
 
-                        methodyShit.driveForeward(5437, -1); //30.5 inches
+                        methodyShit.driveForeward(5437, 1); //30.5 inches
 
                         methodyShit.placeTeamMarker();
 
-                        methodyShit.driveForeward(15062, 1); //84.5 inches, power positive to indicate reverse
+//                        methodyShit.driveBack(15062, 1); //84.5 inches
 
 
                     } else if (position == MineralPosition.RIGHT) {//right's current tune: needs improvement
@@ -181,19 +181,19 @@ public class autoFacingDepot extends LinearOpMode {
                         telemetry.update();
                         methodyShit.walkThePlank();
 
-                        methodyShit.rotateLeft(636, -1); //30 degrees
+                        methodyShit.rotateLeft(636, 1); //30 degrees
 
-                        methodyShit.driveForeward(7843, -1); //44 inches
+                        methodyShit.driveForeward(7843, 1); //44 inches
 
-                        methodyShit.rotateLeft(1568, -1); //74 degrees
+                        methodyShit.rotateLeft(1568, 1); //74 degrees
 
-                        methodyShit.driveForeward(5437, -1); //30.5 inches
+                        methodyShit.driveForeward(5437, 1); //30.5 inches
 
                         methodyShit.placeTeamMarker();
 
-                        methodyShit.rotateLeft(1907, -1); //90 degrees
-
-                        methodyShit.driveForeward(15062, -1); //84.5 inches
+//                        methodyShit.rotateLeft(1907, 1); //90 degrees
+//
+//                        methodyShit.driveForeward(15062, 1); //84.5 inches
 
 
                     } else if (position == MineralPosition.CENTER) {//center's current tune: good enough!
@@ -201,30 +201,33 @@ public class autoFacingDepot extends LinearOpMode {
                         telemetry.update();
                         methodyShit.walkThePlank();
 
-                        methodyShit.driveForeward(10800, -1); //60 inches (greater)
+                        methodyShit.driveForeward(10800, 1); //60 inches (greater)
 
                         methodyShit.placeTeamMarker();
-                        methodyShit.driveForeward(350, 1);
 
-                        methodyShit.rotateRight(2754, -1); //137 degrees (needed to be greater)
+//                        methodyShit.driveForeward(350, 1);
+//
+//                        methodyShit.rotateRight(2754, 1); //137 degrees (needed to be greater)
+//
+//                        methodyShit.driveForeward(5062, 1); //84.5 inches
+//
+//                        methodyShit.rotateRight(500, 1);
+//
+//                        methodyShit.driveForeward(10000, 1);
 
-                        methodyShit.driveForeward(5062, -1); //84.5 inches
-
-                        methodyShit.rotateRight(500, -1);
-
-                        methodyShit.driveForeward(10000, -1);
-
-                    } else if (ranVuforia == 27) {//abusing the vuforia loop counter as a timer
+                    } else if (ranVuforia == 15) {//abusing the vuforia loop counter as a timer
                         telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
                         telemetry.update();
                         methodyShit.walkThePlank();
-                        methodyShit.driveForeward(10695, -1); //60 inches
+                        methodyShit.driveForeward(10695, 1); //60 inches
 
                         methodyShit.placeTeamMarker();
 
-                        methodyShit.rotateLeft(2904, -1); //137 degrees
-
-                        methodyShit.driveForeward(15062, -1); //84.5 inches
+//                        methodyShit.driveForeward(-450, 1);
+//
+//                        methodyShit.rotateLeft(2904, 1); //137 degrees
+//
+//                        methodyShit.driveForeward(15062, 1); //84.5 inches
                     }
 
 

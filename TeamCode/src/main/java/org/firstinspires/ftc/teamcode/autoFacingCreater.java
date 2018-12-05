@@ -91,11 +91,11 @@ public class autoFacingCreater extends LinearOpMode {
             if (tfod != null) {
                 tfod.activate();
             }
+            methodyShit.descendTheMast();
 
             //methodyShit.dropDown();
 
             while (opModeIsActive()) {
-                methodyShit.descendTheMast();
 
 
                 if (tfod != null) {
@@ -159,13 +159,13 @@ public class autoFacingCreater extends LinearOpMode {
                         telemetry.update();
                         methodyShit.walkThePlank();
 
-                        methodyShit.driveToMarkerAndBack();
+//                        methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.rotateLeft(636, -1); //*30 degrees
+                        methodyShit.rotateLeft(636, 1); //*30 degrees
 
-                        methodyShit.driveForeward(5258, -1); //*29.5 inches
+                        methodyShit.driveForeward(5258, 1); //*29.5 inches
 
-                        methodyShit.rotateRight(1780, -1); //*84 degrees
+                        methodyShit.rotateRight(1780, 1); //*84 degrees
 
                         methodyShit.driveForeward(3208, 1); //*18 inches
 
@@ -175,28 +175,28 @@ public class autoFacingCreater extends LinearOpMode {
                         telemetry.update();
                         methodyShit.walkThePlank();
 
-                        methodyShit.driveToMarkerAndBack();
+//                        methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.rotateRight(636, -1); //*30 degrees
+                        methodyShit.rotateRight(636, 1); //*30 degrees
 
-                        methodyShit.driveForeward(5258, -1); //*29.5 inches
+                        methodyShit.driveForeward(5258, 1); //*29.5 inches
 
-                        methodyShit.rotateLeft(1780, -1); //*84 degrees
+                        methodyShit.rotateLeft(1780, 1); //*84 degrees
 
-                        methodyShit.driveForeward(3208, -1); //*18 inches
+                        methodyShit.driveForeward(3208, 1); //*18 inches
 
                     } else if (position == MineralPosition.CENTER) { //mineralPosition.CENTER or not found
                         telemetry.addData("Executing: Gold Mineral Position", "Center");
                         telemetry.update();
                         methodyShit.walkThePlank();
 
-                        methodyShit.driveToMarkerAndBack();
+//                        methodyShit.driveToMarkerAndBack();
 
                         methodyShit.driveForeward(6417, 1); //*36 inches
 
 
 
-                    } else if (ranVuforia == 27) {
+                    } else if (ranVuforia == 15) {
                         telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
                         telemetry.update();
                         methodyShit.walkThePlank();

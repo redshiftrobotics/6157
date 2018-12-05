@@ -55,18 +55,18 @@ public class MethodyShit {
 
     public void rotateLeft(int targetPosition, double power) {
         resetEncoders();
-        leftDrive.setTargetPosition(targetPosition);
+        leftDrive.setTargetPosition(-targetPosition);
         leftDrive.setPower(power);
-        rightDrive.setTargetPosition(-targetPosition);
+        rightDrive.setTargetPosition(targetPosition);
         rightDrive.setPower(power);
         waitToFinish();
     }
 
     public void rotateRight(int targetPosition, double power) {
         resetEncoders();
-        leftDrive.setTargetPosition(-targetPosition);
+        leftDrive.setTargetPosition(targetPosition);
         leftDrive.setPower(power);
-        rightDrive.setTargetPosition(targetPosition);
+        rightDrive.setTargetPosition(-targetPosition);
         rightDrive.setPower(power);
         waitToFinish();
     }
@@ -80,39 +80,50 @@ public class MethodyShit {
         waitToFinish();
     }
 
+    public void driveBack(int targetPosition, double power) {
+        resetEncoders();
+        leftDrive.setTargetPosition(-targetPosition);
+        leftDrive.setPower(power);
+        rightDrive.setTargetPosition(-targetPosition);
+        rightDrive.setPower(power);
+        waitToFinish();
+    }
+
     public void driveToMarkerAndBack() {//* = using calculated values
 
-        rotateLeft(1272, -1); //*60 degrees
+        driveForeward(2852, 1); //16 inches
 
-        driveForeward(7665, -1); //*43 inches
+        rotateLeft(1272, 1); //*60 degrees
 
-        rotateLeft(1590, -1); //*75 degrees
+        driveForeward(7665, 1); //*43 inches
 
-        driveForeward(11764, -1); //*66 inches
+        rotateLeft(1590, 1); //*75 degrees
+
+        driveForeward(11764, 1); //*66 inches
 
         placeTeamMarker();
 
-        driveForeward(11764, 1); //*66 inches, power is positive to indicate reverse
+        driveBack(11764, 1); //*66 inches
 
-        rotateRight(1590, -1); //*75 degrees
+        rotateRight(1590, 1); //*75 degrees
 
-        driveForeward(7665, 1); //*43 inches, power is positive to indicate reverse
+        driveBack(7665, 1); //*43 inches
 
-        rotateRight(1272, -1); //*60 degrees
+        rotateRight(1272, 1); //*60 degrees
     }
 
     public void descendTheMast() throws InterruptedException {
         liftDrive.setPower(-1);
         Thread.sleep(10000);
         liftDrive.setPower(0);
-        driveForeward(1069, 1); //.5 inches, power positive to indicate reverse
+        driveBack(1069, 1); //.5 inches
     }
 
     public void walkThePlank() {
-        rotateLeft(954, -1); //45 degrees
-        driveForeward(1069, -1); //.5 inches
-        rotateLeft(954, -1); //45 degrees
-        driveForeward(1069, 1); //.5 inches, power positive to indicate reverse
+        rotateLeft(954, 1); //45 degrees
+        driveForeward(1069, 1); //.5 inches
+        rotateLeft(954, 1); //45 degrees
+        driveBack(1069, 1); //.5 inches
     }
 
 }
