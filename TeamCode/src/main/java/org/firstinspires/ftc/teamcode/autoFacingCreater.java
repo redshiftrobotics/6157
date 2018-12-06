@@ -22,6 +22,7 @@ public class autoFacingCreater extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
+    DcMotor leftDrive2;
     Servo servo;
     DcMotor liftDrive;
 
@@ -62,11 +63,12 @@ public class autoFacingCreater extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
+        this.leftDrive2 = hardwareMap.dcMotor.get("left_drive_2");
         this.servo = hardwareMap.servo.get("servo");
         this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
         this.methodyShit = new MethodyShit(hardwareMap);
 
-        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);//IMPORTANT: MAY NEEED TO REVERSE leftDrive2 AS WELL!
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -161,13 +163,13 @@ public class autoFacingCreater extends LinearOpMode {
 
 //                        methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.rotateLeft(636, 1); //*30 degrees
+                        methodyShit.rotateLeft(636, 0.5); //*30 degrees
 
-                        methodyShit.driveForeward(5258, 1); //*29.5 inches
+                        methodyShit.driveForeward(5258, 0.5); //*29.5 inches
 
-                        methodyShit.rotateRight(1780, 1); //*84 degrees
+                        methodyShit.rotateRight(1780, 0.5); //*84 degrees
 
-                        methodyShit.driveForeward(3208, 1); //*18 inches
+                        methodyShit.driveForeward(3208, 0.5); //*18 inches
 
 
                     } else if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT) {
@@ -177,13 +179,13 @@ public class autoFacingCreater extends LinearOpMode {
 
 //                        methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.rotateRight(636, 1); //*30 degrees
+                        methodyShit.rotateRight(636, 0.5); //*30 degrees
 
-                        methodyShit.driveForeward(5258, 1); //*29.5 inches
+                        methodyShit.driveForeward(5258, 0.5); //*29.5 inches
 
-                        methodyShit.rotateLeft(1780, 1); //*84 degrees
+                        methodyShit.rotateLeft(1780, 0.5); //*84 degrees
 
-                        methodyShit.driveForeward(3208, 1); //*18 inches
+                        methodyShit.driveForeward(3208, 0.5); //*18 inches
 
                     } else if (position == MineralPosition.CENTER) { //mineralPosition.CENTER or not found
                         telemetry.addData("Executing: Gold Mineral Position", "Center");
@@ -192,7 +194,7 @@ public class autoFacingCreater extends LinearOpMode {
 
 //                        methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.driveForeward(6417, 1); //*36 inches
+                        methodyShit.driveForeward(6417, 0.5); //*36 inches
 
 
 
@@ -202,7 +204,7 @@ public class autoFacingCreater extends LinearOpMode {
                         methodyShit.walkThePlank();
                         methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.driveForeward(6417, 1); //*36 inches
+                        methodyShit.driveForeward(6417, 0.5); //*36 inches
 
                     }
 

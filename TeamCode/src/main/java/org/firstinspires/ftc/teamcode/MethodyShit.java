@@ -9,6 +9,7 @@ public class MethodyShit {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
+    DcMotor leftDrive2;
     Servo servo;
     DcMotor liftDrive;
 
@@ -18,10 +19,11 @@ public class MethodyShit {
         this.hardwareMap = hardwareMap;
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
+        this.leftDrive2 = hardwareMap.dcMotor.get("left_drive_2");
         this.servo = hardwareMap.servo.get("servo");
         this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
 
-        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);//IMPORTANT: MAY NEEED TO REVERSE leftDrive2 AS WELL!
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -31,7 +33,7 @@ public class MethodyShit {
         leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);//Again, need encoders to do this for leftDrive2
     }
 
 //    int targetPosition = 0;
@@ -50,80 +52,80 @@ public class MethodyShit {
     }
 
     public void placeTeamMarker() {
-        servo.setPosition(0.5);
+        servo.setPosition(0.35);
     }
 
     public void rotateLeft(int targetPosition, double power) {
         resetEncoders();
-        leftDrive.setTargetPosition(-targetPosition);
+        leftDrive.setTargetPosition(-targetPosition/4);
         leftDrive.setPower(power);
-        rightDrive.setTargetPosition(targetPosition);
+        rightDrive.setTargetPosition(targetPosition/4);
         rightDrive.setPower(power);
         waitToFinish();
     }
 
     public void rotateRight(int targetPosition, double power) {
         resetEncoders();
-        leftDrive.setTargetPosition(targetPosition);
+        leftDrive.setTargetPosition(targetPosition/4);
         leftDrive.setPower(power);
-        rightDrive.setTargetPosition(-targetPosition);
+        rightDrive.setTargetPosition(-targetPosition/4);
         rightDrive.setPower(power);
         waitToFinish();
     }
 
     public void driveForeward(int targetPosition, double power) {
         resetEncoders();
-        leftDrive.setTargetPosition(targetPosition);
+        leftDrive.setTargetPosition(targetPosition/4);
         leftDrive.setPower(power);
-        rightDrive.setTargetPosition(targetPosition);
+        rightDrive.setTargetPosition(targetPosition/4);
         rightDrive.setPower(power);
         waitToFinish();
     }
 
     public void driveBack(int targetPosition, double power) {
         resetEncoders();
-        leftDrive.setTargetPosition(-targetPosition);
+        leftDrive.setTargetPosition(-targetPosition/4);
         leftDrive.setPower(power);
-        rightDrive.setTargetPosition(-targetPosition);
+        rightDrive.setTargetPosition(-targetPosition/4);
         rightDrive.setPower(power);
         waitToFinish();
     }
 
     public void driveToMarkerAndBack() {//* = using calculated values
 
-        driveForeward(2852, 1); //16 inches
+        driveForeward(2852, 0.5); //16 inches
 
-        rotateLeft(1272, 1); //*60 degrees
+        rotateLeft(1272, 0.5); //*60 degrees
 
-        driveForeward(7665, 1); //*43 inches
+        driveForeward(7665, 0.5); //*43 inches
 
-        rotateLeft(1590, 1); //*75 degrees
+        rotateLeft(1590, 0.5); //*75 degrees
 
-        driveForeward(11764, 1); //*66 inches
+        driveForeward(11764, 0.5); //*66 inches
 
         placeTeamMarker();
 
-        driveBack(11764, 1); //*66 inches
+        driveBack(11764, 0.5); //*66 inches
 
-        rotateRight(1590, 1); //*75 degrees
+        rotateRight(1590, 0.5); //*75 degrees
 
-        driveBack(7665, 1); //*43 inches
+        driveBack(7665, 0.5); //*43 inches
 
-        rotateRight(1272, 1); //*60 degrees
+        rotateRight(1272, 0.5); //*60 degrees
     }
 
     public void descendTheMast() throws InterruptedException {
         liftDrive.setPower(-1);
         Thread.sleep(10000);
         liftDrive.setPower(0);
-        driveBack(1069, 1); //.5 inches
+        driveBack(1069, 0.5); //.5 inches
     }
 
     public void walkThePlank() {
-        rotateLeft(954, 1); //45 degrees
-        driveForeward(1069, 1); //.5 inches
-        rotateLeft(954, 1); //45 degrees
-        driveBack(1069, 1); //.5 inches
+        rotateLeft(954, 0.5); //45 degrees
+        driveForeward(1069, 0.5); //.5 inches
+        rotateLeft(954, 0.5); //45 degrees
+        driveBack(1069, 0.5); //.5 inches
     }
 
 }

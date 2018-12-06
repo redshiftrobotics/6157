@@ -22,6 +22,7 @@ public class autoFacingDepot extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
+    DcMotor leftDrive2;
     Servo servo;
     DcMotor liftDrive;
 
@@ -62,11 +63,12 @@ public class autoFacingDepot extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
+        this.leftDrive2 = hardwareMap.dcMotor.get("left_drive_2");
         this.servo = hardwareMap.servo.get("servo");
         this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
         this.methodyShit = new MethodyShit(hardwareMap);
 
-        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);//IMPORTANT: MAY NEEED TO REVERSE leftDrive2 AS WELL!
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -163,17 +165,17 @@ public class autoFacingDepot extends LinearOpMode {
 
                         methodyShit.walkThePlank();
 
-                        methodyShit.rotateRight(636, 1); //30 degrees
+                        methodyShit.rotateRight(636, 0.5); //30 degrees
 
-                        methodyShit.driveForeward(7843, 1); //44 inches
+                        methodyShit.driveForeward(7843, 0.5); //44 inches
 
-                        methodyShit.rotateRight(1568, 1); //74 degrees
+                        methodyShit.rotateRight(1568, 0.5); //74 degrees
 
-                        methodyShit.driveForeward(5437, 1); //30.5 inches
+                        methodyShit.driveForeward(5437, 0.5); //30.5 inches
 
                         methodyShit.placeTeamMarker();
 
-//                        methodyShit.driveBack(15062, 1); //84.5 inches
+//                        methodyShit.driveBack(15062, 0.5); //84.5 inches
 
 
                     } else if (position == MineralPosition.RIGHT) {//right's current tune: needs improvement
@@ -181,19 +183,19 @@ public class autoFacingDepot extends LinearOpMode {
                         telemetry.update();
                         methodyShit.walkThePlank();
 
-                        methodyShit.rotateLeft(636, 1); //30 degrees
+                        methodyShit.rotateLeft(636, 0.5); //30 degrees
 
-                        methodyShit.driveForeward(7843, 1); //44 inches
+                        methodyShit.driveForeward(7843, 0.5); //44 inches
 
-                        methodyShit.rotateLeft(1568, 1); //74 degrees
+                        methodyShit.rotateLeft(1568, 0.5); //74 degrees
 
-                        methodyShit.driveForeward(5437, 1); //30.5 inches
+                        methodyShit.driveForeward(5437, 0.5); //30.5 inches
 
                         methodyShit.placeTeamMarker();
 
-//                        methodyShit.rotateLeft(1907, 1); //90 degrees
+//                        methodyShit.rotateLeft(1907, 0.5); //90 degrees
 //
-//                        methodyShit.driveForeward(15062, 1); //84.5 inches
+//                        methodyShit.driveForeward(15062, 0.5); //84.5 inches
 
 
                     } else if (position == MineralPosition.CENTER) {//center's current tune: good enough!
@@ -201,33 +203,33 @@ public class autoFacingDepot extends LinearOpMode {
                         telemetry.update();
                         methodyShit.walkThePlank();
 
-                        methodyShit.driveForeward(10800, 1); //60 inches (greater)
+                        methodyShit.driveForeward(10800, 0.5); //60 inches (greater)
 
                         methodyShit.placeTeamMarker();
 
-//                        methodyShit.driveForeward(350, 1);
+//                        methodyShit.driveForeward(350, 0.5);
 //
-//                        methodyShit.rotateRight(2754, 1); //137 degrees (needed to be greater)
+//                        methodyShit.rotateRight(2754, 0.5); //137 degrees (needed to be greater)
 //
-//                        methodyShit.driveForeward(5062, 1); //84.5 inches
+//                        methodyShit.driveForeward(5062, 0.5); //84.5 inches
 //
-//                        methodyShit.rotateRight(500, 1);
+//                        methodyShit.rotateRight(500, 0.5);
 //
-//                        methodyShit.driveForeward(10000, 1);
+//                        methodyShit.driveForeward(10000, 0.5);
 
                     } else if (ranVuforia == 15) {//abusing the vuforia loop counter as a timer
                         telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
                         telemetry.update();
                         methodyShit.walkThePlank();
-                        methodyShit.driveForeward(10695, 1); //60 inches
+                        methodyShit.driveForeward(10695, 0.5); //60 inches
 
                         methodyShit.placeTeamMarker();
 
-//                        methodyShit.driveForeward(-450, 1);
+//                        methodyShit.driveForeward(-450, 0.5);
 //
-//                        methodyShit.rotateLeft(2904, 1); //137 degrees
+//                        methodyShit.rotateLeft(2904, 0.5); //137 degrees
 //
-//                        methodyShit.driveForeward(15062, 1); //84.5 inches
+//                        methodyShit.driveForeward(15062, 0.5); //84.5 inches
                     }
 
 

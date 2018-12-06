@@ -10,7 +10,10 @@ public class Teleop extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
-    DcMotor liftDrive;
+    DcMotor liftDrive;//Make sure to add this back on the phone!
+    DcMotor leftDrive2;
+//    DcMotor rightDrive2;
+
 
 //    DcMotor armLiftBottomA;
 //    DcMotor armLiftBottomB;
@@ -27,8 +30,21 @@ public class Teleop extends LinearOpMode {
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
         this.liftDrive = hardwareMap.dcMotor.get("lift_drive");//thanks for this name
+        this.leftDrive2 = hardwareMap.dcMotor.get("left_drive_2");
+//        this.rightDrive2 = hardwareMap.dcMotor.get("right_drive_2");
 
         this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        rightDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);//won't work without encoders
+
+        // bPrevState and bCurrState represent the previous and current state of the button.
+        boolean bPrevState = false;
+        boolean bCurrState;
+        boolean ludicrousMode = false;
+        double speedMultiplier = 0.5;
+        
 
 //        this.armLiftBottomA = hardwareMap.dcMotor.get("bottom_a");
 //        this.armLiftBottomB = hardwareMap.dcMotor.get("bottom_b");
@@ -43,8 +59,31 @@ public class Teleop extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            this.leftDrive.setPower(gamepad1.left_stick_y);
-            this.rightDrive.setPower(gamepad1.right_stick_y);
+            bCurrState = (gamepad1.right_trigger >= 0.75);
+
+            // check for button state transitions.
+            if (bCurrState && (bCurrState != bPrevState))  {
+
+                // button is transitioning to a pressed state. So Toggle LED
+                ludicrousMode = !ludicrousMode;
+                if (ludicrousMode) {
+                    speedMultiplier = 1;
+                    telemetry.addLine("Ludicrous mode enabled.");
+                } else {
+                    speedMultiplier = 0.5;
+                    telemetry.addLine("Ludicrous mode disabled.");
+                }
+                telemetry.update();
+            }
+
+            // update previous state variable.
+            bPrevState = bCurrState;
+
+            this.leftDrive.setPower(gamepad1.left_stick_y * speedMultiplier);
+            this.rightDrive.setPower(gamepad1.right_stick_y * speedMultiplier);
+            this.leftDrive2.setPower(gamepad1.left_stick_y * speedMultiplier);
+//            this.rightDrive2.setPower(gamepad1.right_stick_y * speedMultiplier);
+
             this.liftDrive.setPower(gamepad2.right_stick_y);
 
 //            this.armLiftBottomA.setPower(gamepad2.left_stick_y);
