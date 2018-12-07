@@ -11,9 +11,6 @@ public class Teleop extends LinearOpMode {
     DcMotor leftDrive;
     DcMotor rightDrive;
     DcMotor liftDrive;//Make sure to add this back on the phone!
-    DcMotor leftDrive2;
-//    DcMotor rightDrive2;
-
 
 //    DcMotor armLiftBottomA;
 //    DcMotor armLiftBottomB;
@@ -30,14 +27,11 @@ public class Teleop extends LinearOpMode {
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
         this.liftDrive = hardwareMap.dcMotor.get("lift_drive");//thanks for this name
-        this.leftDrive2 = hardwareMap.dcMotor.get("left_drive_2");
 //        this.rightDrive2 = hardwareMap.dcMotor.get("right_drive_2");
 
         this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);//Joysticks are reversed (in theory, haven't checked) so the left drive has to be reversed while the joysticks negate the reversed motors
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);//won't work without encoders
-//        rightDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // bPrevState and bCurrState represent the previous and current state of the button.
         boolean bPrevState = false;
@@ -81,8 +75,6 @@ public class Teleop extends LinearOpMode {
 
             this.leftDrive.setPower(gamepad1.left_stick_y * speedMultiplier);
             this.rightDrive.setPower(gamepad1.right_stick_y * speedMultiplier);
-            this.leftDrive2.setPower(gamepad1.left_stick_y * speedMultiplier);
-//            this.rightDrive2.setPower(gamepad1.right_stick_y * speedMultiplier);
 
             this.liftDrive.setPower(gamepad2.right_stick_y);
 

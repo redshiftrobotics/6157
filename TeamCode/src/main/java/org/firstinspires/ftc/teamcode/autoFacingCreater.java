@@ -22,7 +22,6 @@ public class autoFacingCreater extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
-    DcMotor leftDrive2;
     Servo servo;
     DcMotor liftDrive;
 
@@ -63,16 +62,13 @@ public class autoFacingCreater extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
-        this.leftDrive2 = hardwareMap.dcMotor.get("left_drive_2");
         this.servo = hardwareMap.servo.get("servo");
         this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
         this.methodyShit = new MethodyShit(hardwareMap);
 
-        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);//IMPORTANT: MAY NEEED TO REVERSE leftDrive2 AS WELL!
-        this.leftDrive2.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         initVuforia();
