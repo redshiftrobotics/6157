@@ -7,11 +7,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class MethodyShit {
 
-    DcMotor leftDrive;
-    DcMotor rightDrive;
-    DcMotor leftDrive2;
+    DcMotor leftDrive;//0
+    DcMotor rightDrive;//1
+    DcMotor leftDrive2;//2
     Servo servo;
-    DcMotor liftDrive;
+    DcMotor liftDrive;//3
 
     HardwareMap hardwareMap;
 
@@ -24,15 +24,19 @@ public class MethodyShit {
         this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);//IMPORTANT: MAY NEEED TO REVERSE leftDrive2 AS WELL!
+        this.leftDrive2.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     public void resetEncoders() {
         leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftDrive2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);//Again, need encoders to do this for leftDrive2
     }
 
@@ -59,6 +63,8 @@ public class MethodyShit {
         resetEncoders();
         leftDrive.setTargetPosition(-targetPosition/4);
         leftDrive.setPower(power);
+        leftDrive2.setTargetPosition(-targetPosition/4);
+        leftDrive2.setPower(power);
         rightDrive.setTargetPosition(targetPosition/4);
         rightDrive.setPower(power);
         waitToFinish();
@@ -68,6 +74,8 @@ public class MethodyShit {
         resetEncoders();
         leftDrive.setTargetPosition(targetPosition/4);
         leftDrive.setPower(power);
+        leftDrive2.setTargetPosition(targetPosition/4);
+        leftDrive2.setPower(power);
         rightDrive.setTargetPosition(-targetPosition/4);
         rightDrive.setPower(power);
         waitToFinish();
@@ -86,6 +94,8 @@ public class MethodyShit {
         resetEncoders();
         leftDrive.setTargetPosition(-targetPosition/4);
         leftDrive.setPower(power);
+        leftDrive2.setTargetPosition(-targetPosition/4);
+        leftDrive2.setPower(power);
         rightDrive.setTargetPosition(-targetPosition/4);
         rightDrive.setPower(power);
         waitToFinish();

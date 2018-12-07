@@ -69,7 +69,9 @@ public class autoFacingDepot extends LinearOpMode {
         this.methodyShit = new MethodyShit(hardwareMap);
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);//IMPORTANT: MAY NEEED TO REVERSE leftDrive2 AS WELL!
+        this.leftDrive2.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 

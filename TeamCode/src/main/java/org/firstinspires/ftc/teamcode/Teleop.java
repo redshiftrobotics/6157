@@ -33,17 +33,17 @@ public class Teleop extends LinearOpMode {
         this.leftDrive2 = hardwareMap.dcMotor.get("left_drive_2");
 //        this.rightDrive2 = hardwareMap.dcMotor.get("right_drive_2");
 
-        this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-//        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        rightDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);//won't work without encoders
+        this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);//Joysticks are reversed (in theory, haven't checked) so the left drive has to be reversed while the joysticks negate the reversed motors
+        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);//won't work without encoders
+//        rightDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         // bPrevState and bCurrState represent the previous and current state of the button.
         boolean bPrevState = false;
         boolean bCurrState;
-        boolean ludicrousMode = false;
-        double speedMultiplier = 0.5;
+        boolean ludicrousMode = true;
+        double speedMultiplier = 1;
         
 
 //        this.armLiftBottomA = hardwareMap.dcMotor.get("bottom_a");
