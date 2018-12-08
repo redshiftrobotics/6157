@@ -7,10 +7,12 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class MethodyShit {
 
-    DcMotor leftDrive;//0
-    DcMotor rightDrive;//1
-    Servo servo;
-    DcMotor liftDrive;//3
+    DcMotor leftDrive;//1:0
+    DcMotor rightDrive;//1:2
+    Servo monkey;
+    DcMotor mast;//3:0
+    DcMotor portDrive;//1:1
+    DcMotor starboardDrive;//1:3
 
     HardwareMap hardwareMap;
 
@@ -18,21 +20,33 @@ public class MethodyShit {
         this.hardwareMap = hardwareMap;
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
-        this.servo = hardwareMap.servo.get("servo");
-        this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
+        this.monkey = hardwareMap.servo.get("monkey");
+        this.mast = hardwareMap.dcMotor.get("mast");
+        this.portDrive = hardwareMap.dcMotor.get("port_drive");
+        this.portDrive = hardwareMap.dcMotor.get("starboard_drive");
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);//IMPORTANT: MAY NEEED TO REVERSE leftDrive2 AS WELL!
+        this.portDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        portDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        starboardDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        mast.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     public void resetEncoders() {
         leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        portDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        starboardDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        portDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);//Again, need encoders to do this for leftDrive2
+        starboardDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
+
+ 
 
 //    int targetPosition = 0;
 //    double power = 0;
@@ -50,7 +64,7 @@ public class MethodyShit {
     }
 
     public void placeTeamMarker() {
-        servo.setPosition(0.35);
+        monkey.setPosition(0.35);
     }
 
     public void rotateLeft(int targetPosition, double power) {
@@ -113,9 +127,9 @@ public class MethodyShit {
     }
 
     public void descendTheMast() throws InterruptedException {
-        liftDrive.setPower(-1);
+        mast.setPower(-1);
         Thread.sleep(10000);
-        liftDrive.setPower(0);
+        mast.setPower(0);
         driveBack(1069, 0.5); //.5 inches
     }
 
