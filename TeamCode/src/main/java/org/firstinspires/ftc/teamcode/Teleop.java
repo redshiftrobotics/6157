@@ -10,14 +10,11 @@ public class Teleop extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
-    DcMotor liftDrive;//Make sure to add this back on the phone!
+    DcMotor mastDrive;
+    DcMotor portDrive;
+    DcMotor starboardDrive;
 
-//    DcMotor armLiftBottomA;
-//    DcMotor armLiftBottomB;
-//    DcMotor armLiftTopA;
-//    DcMotor armLiftTopB;
-//
-//    DcMotor intakeMotor;
+    int polarityReverser = -1;
 
     @Override
     public void runOpMode() {
@@ -26,12 +23,17 @@ public class Teleop extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
-        this.liftDrive = hardwareMap.dcMotor.get("lift_drive");//thanks for this name
-//        this.rightDrive2 = hardwareMap.dcMotor.get("right_drive_2");
+        this.portDrive = hardwareMap.dcMotor.get("port_drive");
+        this.starboardDrive = hardwareMap.dcMotor.get("starboard_drive");
+        this.mastDrive = hardwareMap.dcMotor.get("mast_drive");
 
-        this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);//Joysticks are reversed (in theory, haven't checked) so the left drive has to be reversed while the joysticks negate the reversed motors
+
+        this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        portDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        starboardDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         // bPrevState and bCurrState represent the previous and current state of the button.
         boolean bPrevState = false;
@@ -53,7 +55,7 @@ public class Teleop extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            bCurrState = (gamepad1.right_trigger >= 0.75);
+            bCurrState = (gamepad1.right_bumper);
 
             // check for button state transitions.
             if (bCurrState && (bCurrState != bPrevState))  {
@@ -74,16 +76,16 @@ public class Teleop extends LinearOpMode {
             bPrevState = bCurrState;
 
             this.leftDrive.setPower(gamepad1.left_stick_y * speedMultiplier);
+            this.portDrive.setPower(gamepad1.left_stick_y * speedMultiplier);
             this.rightDrive.setPower(gamepad1.right_stick_y * speedMultiplier);
+            this.starboardDrive.setPower(gamepad1.right_stick_y * speedMultiplier);
 
-            this.liftDrive.setPower(gamepad2.right_stick_y);
+            this.mastDrive.setPower(gamepad1.right_trigger * polarityReverser);
+            this.mastDrive.setPower(gamepad1.left_trigger);
 
-//            this.armLiftBottomA.setPower(gamepad2.left_stick_y);
-//            this.armLiftBottomB.setPower(gamepad2.left_stick_y);
-//            this.armLiftTopA.setPower(gamepad2.right_stick_y);
-//            this.armLiftTopB.setPower(gamepad2.right_stick_y);
-//
-//            this.intakeMotor.setPower(gamepad2.left_trigger);
+//            this.liftDrive.setPower(gamepad2.right_stick_y);
+
+
 
             idle();
         }
