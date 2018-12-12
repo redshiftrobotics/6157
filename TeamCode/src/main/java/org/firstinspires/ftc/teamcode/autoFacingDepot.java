@@ -65,16 +65,18 @@ public class autoFacingDepot extends LinearOpMode {
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
         this.monkey = hardwareMap.servo.get("monkey");
-        this.mast = hardwareMap.dcMotor.get("mast");
+        this.mast = hardwareMap.dcMotor.get("mast_drive");
         this.portDrive = hardwareMap.dcMotor.get("port_drive");
         this.starboardDrive = hardwareMap.dcMotor.get("starboard_drive");
         this.methodyShit = new MethodyShit(hardwareMap);
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         this.portDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-//        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        portDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        starboardDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        mast.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         initVuforia();
 
