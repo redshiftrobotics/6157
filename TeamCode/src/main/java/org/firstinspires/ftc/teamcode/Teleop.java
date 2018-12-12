@@ -10,9 +10,9 @@ public class Teleop extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
-    DcMotor mastDrive;
     DcMotor portDrive;
     DcMotor starboardDrive;
+    DcMotor mastDrive;
 
     int polarityReverser = -1;
 
@@ -29,10 +29,10 @@ public class Teleop extends LinearOpMode {
 
 
         this.leftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        portDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        starboardDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        portDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        starboardDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
         // bPrevState and bCurrState represent the previous and current state of the button.

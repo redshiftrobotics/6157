@@ -20,10 +20,12 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 // @Disabled
 public class autoFacingCreater extends LinearOpMode {
 
-    DcMotor leftDrive;
-    DcMotor rightDrive;
-    Servo servo;
-    DcMotor liftDrive;
+    DcMotor leftDrive;//1:0
+    DcMotor rightDrive;//1:2
+    Servo monkey;
+    DcMotor mast;//3:0
+    DcMotor portDrive;//1:1
+    DcMotor starboardDrive;//1:3
 
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     private static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -62,14 +64,17 @@ public class autoFacingCreater extends LinearOpMode {
 
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
-        this.servo = hardwareMap.servo.get("servo");
-        this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
+        this.monkey = hardwareMap.servo.get("monkey");
+        this.mast = hardwareMap.dcMotor.get("mast");
+        this.portDrive = hardwareMap.dcMotor.get("port_drive");
+        this.starboardDrive = hardwareMap.dcMotor.get("starboard_drive");
         this.methodyShit = new MethodyShit(hardwareMap);
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.portDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        liftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         initVuforia();
 

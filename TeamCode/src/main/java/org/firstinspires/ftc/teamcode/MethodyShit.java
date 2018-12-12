@@ -22,16 +22,16 @@ public class MethodyShit {
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
         this.monkey = hardwareMap.servo.get("monkey");
         this.mast = hardwareMap.dcMotor.get("mast");
-        this.portDrive = hardwareMap.dcMotor.get("port_drive");
-        this.portDrive = hardwareMap.dcMotor.get("starboard_drive");
+        this.portDrive = hardwareMap.dcMotor.get("port_drive");//left
+        this.starboardDrive = hardwareMap.dcMotor.get("starboard_drive");//right
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);//IMPORTANT: MAY NEEED TO REVERSE leftDrive2 AS WELL!
         this.portDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        portDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        starboardDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        portDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        starboardDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         mast.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
@@ -55,7 +55,7 @@ public class MethodyShit {
 //    int rightPosition = rightDrive.getCurrentPosition();
 
     public void waitToFinish() {
-        while ((leftDrive.isBusy() || rightDrive.isBusy())) {
+        while ((leftDrive.isBusy() || rightDrive.isBusy()) || portDrive.isBusy() || starboardDrive.isBusy()) {
 //            telemetry.addData("Left Encoder Position", leftPosition);
 //            telemetry.addData("Right Encoder Position", rightPosition);
 //            telemetry.update();
@@ -71,8 +71,12 @@ public class MethodyShit {
         resetEncoders();
         leftDrive.setTargetPosition(-targetPosition/4);
         leftDrive.setPower(power);
+        portDrive.setTargetPosition(-targetPosition/4);
+        portDrive.setPower(power);
         rightDrive.setTargetPosition(targetPosition/4);
         rightDrive.setPower(power);
+        starboardDrive.setTargetPosition(targetPosition/4);
+        starboardDrive.setPower(power);
         waitToFinish();
     }
 
@@ -80,8 +84,12 @@ public class MethodyShit {
         resetEncoders();
         leftDrive.setTargetPosition(targetPosition/4);
         leftDrive.setPower(power);
+        portDrive.setTargetPosition(targetPosition/4);
+        portDrive.setPower(power);
         rightDrive.setTargetPosition(-targetPosition/4);
         rightDrive.setPower(power);
+        starboardDrive.setTargetPosition(-targetPosition/4);
+        starboardDrive.setPower(power);
         waitToFinish();
     }
 
@@ -89,8 +97,12 @@ public class MethodyShit {
         resetEncoders();
         leftDrive.setTargetPosition(targetPosition/4);
         leftDrive.setPower(power);
+        portDrive.setTargetPosition(targetPosition/4);
+        portDrive.setPower(power);
         rightDrive.setTargetPosition(targetPosition/4);
         rightDrive.setPower(power);
+        starboardDrive.setTargetPosition(targetPosition/4);
+        starboardDrive.setPower(power);
         waitToFinish();
     }
 
@@ -98,8 +110,12 @@ public class MethodyShit {
         resetEncoders();
         leftDrive.setTargetPosition(-targetPosition/4);
         leftDrive.setPower(power);
+        portDrive.setTargetPosition(-targetPosition/4);
+        portDrive.setPower(power);
         rightDrive.setTargetPosition(-targetPosition/4);
         rightDrive.setPower(power);
+        starboardDrive.setTargetPosition(-targetPosition/4);
+        starboardDrive.setPower(power);
         waitToFinish();
     }
 
