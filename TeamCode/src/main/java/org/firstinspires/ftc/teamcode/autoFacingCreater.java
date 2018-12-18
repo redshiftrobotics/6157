@@ -153,59 +153,59 @@ public class autoFacingCreater extends LinearOpMode {
 
 
 
-
-                    if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.LEFT) {
-                        telemetry.addData("Executing: Gold Mineral Position", "Left");
-                        telemetry.update();
-                        methodyShit.walkThePlank();
-
-//                        methodyShit.driveToMarkerAndBack();
-
-                        methodyShit.rotateLeft(636, 1); //*30 degrees
-
-                        methodyShit.driveForeward(5258, 1); //*29.5 inches
-
-                        methodyShit.rotateRight(1780, 1); //*84 degrees
-
-                        methodyShit.driveForeward(3208, 1); //*18 inches
-
-
-                    } else if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT) {
-                        telemetry.addData("Executing: Gold Mineral Position", "Right");
-                        telemetry.update();
-                        methodyShit.walkThePlank();
+                    if (ranVuforia == 42) {
+                        methodyShit.ceaseDescent();
+                        if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.LEFT) {
+                            telemetry.addData("Executing: Gold Mineral Position", "Left");
+                            telemetry.update();
+                            methodyShit.walkThePlank();
 
 //                        methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.rotateRight(636, 1); //*30 degrees
+                            methodyShit.rotateLeft(636, 1); //*30 degrees
 
-                        methodyShit.driveForeward(5258, 1); //*29.5 inches
+                            methodyShit.driveForeward(5258, 1); //*29.5 inches
 
-                        methodyShit.rotateLeft(1780, 1); //*84 degrees
+                            methodyShit.rotateRight(1780, 1); //*84 degrees
 
-                        methodyShit.driveForeward(3208, 1); //*18 inches
+                            methodyShit.driveForeward(3208, 1); //*18 inches
 
-                    } else if (position == MineralPosition.CENTER) { //mineralPosition.CENTER or not found
-                        telemetry.addData("Executing: Gold Mineral Position", "Center");
-                        telemetry.update();
-                        methodyShit.walkThePlank();
+
+                        } else if (position == org.firstinspires.ftc.teamcode.autoFacingCreater.MineralPosition.RIGHT) {
+                            telemetry.addData("Executing: Gold Mineral Position", "Right");
+                            telemetry.update();
+                            methodyShit.walkThePlank();
 
 //                        methodyShit.driveToMarkerAndBack();
 
-                        methodyShit.driveForeward(6417, 1); //*36 inches
+                            methodyShit.rotateRight(636, 1); //*30 degrees
+
+                            methodyShit.driveForeward(5258, 1); //*29.5 inches
+
+                            methodyShit.rotateLeft(1780, 1); //*84 degrees
+
+                            methodyShit.driveForeward(3208, 1); //*18 inches
+
+                        } else if (position == MineralPosition.CENTER) { //mineralPosition.CENTER or not found
+                            telemetry.addData("Executing: Gold Mineral Position", "Center");
+                            telemetry.update();
+                            methodyShit.walkThePlank();
+
+//                        methodyShit.driveToMarkerAndBack();
+
+                            methodyShit.driveForeward(6417, 1); //*36 inches
 
 
+                        } else if (ranVuforia == 15) {
+                            telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
+                            telemetry.update();
+                            methodyShit.walkThePlank();
+                            methodyShit.driveToMarkerAndBack();
 
-                    } else if (ranVuforia == 15) {
-                        telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
-                        telemetry.update();
-                        methodyShit.walkThePlank();
-                        methodyShit.driveToMarkerAndBack();
+                            methodyShit.driveForeward(6417, 1); //*36 inches
 
-                        methodyShit.driveForeward(6417, 1); //*36 inches
-
+                        }
                     }
-
 
 
                 }

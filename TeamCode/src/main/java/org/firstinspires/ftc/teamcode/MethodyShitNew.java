@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class MethodyShit {
+public class MethodyShitNew {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
@@ -14,7 +14,7 @@ public class MethodyShit {
 
     HardwareMap hardwareMap;
 
-    public MethodyShit(HardwareMap hardwareMap){
+    public MethodyShitNew(HardwareMap hardwareMap){
         this.hardwareMap = hardwareMap;
         this.leftDrive = hardwareMap.dcMotor.get("left_drive");
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
@@ -114,16 +114,27 @@ public class MethodyShit {
 
     public void descendTheMast() throws InterruptedException {
         liftDrive.setPower(-1);
-        Thread.sleep(10000);
+    }
+
+    public void ceaseDescent() {
         liftDrive.setPower(0);
         driveBack(1069, 1); //.5 inches
     }
 
     public void walkThePlank() {
         rotateLeft(954, 1); //45 degrees
-        driveForeward(1069, 1); //.5 inches
+        driveForeward(2000, 1); //.5 inches  2000
         rotateLeft(954, 1); //45 degrees
-        driveBack(1069, 1); //.5 inches
+        driveBack(1300, 1); //.5 inches
     }
 
+    public void centerMineral() {
+
+        driveForeward(7400, 0.75);
+
+    }
+
+    public void defaultMineral() {
+        driveForeward(7400, 0.75);
+    }
 }

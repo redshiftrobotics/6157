@@ -16,9 +16,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
     //Cannot resolve symbol 'tfod' -- Could be fixed by; updating to 4.3, checking for presence of tfod library and adding if needed.
 
 
-@Autonomous(name = "Autonomous Depot", group = "Things")
+@Autonomous(name = "Autonomous Depot New", group = "Things")
 // @Disabled
-public class autoFacingDepot extends LinearOpMode {
+public class AutoFacingDepotNew extends LinearOpMode {
 
     DcMotor leftDrive;
     DcMotor rightDrive;
@@ -43,7 +43,7 @@ public class autoFacingDepot extends LinearOpMode {
 
     }
 
-    MethodyShit methodyShit;
+    MethodyShitNew methodyShit;
 
 
 
@@ -64,7 +64,7 @@ public class autoFacingDepot extends LinearOpMode {
         this.rightDrive = hardwareMap.dcMotor.get("right_drive");
         this.servo = hardwareMap.servo.get("servo");
         this.liftDrive = hardwareMap.dcMotor.get("lift_drive");
-        this.methodyShit = new MethodyShit(hardwareMap);
+        this.methodyShit = new MethodyShitNew(hardwareMap);
 
         this.rightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -157,80 +157,41 @@ public class autoFacingDepot extends LinearOpMode {
 
 
 
-                    if (position == MineralPosition.LEFT) {//left's current tune: needs improvement
-                        telemetry.addData("Executing: Gold Mineral Position", "Left");
-                        telemetry.update();
-
-                        methodyShit.walkThePlank();
-
-                        methodyShit.rotateRight(636, 1); //30 degrees
-
-                        methodyShit.driveForeward(7843, 1); //44 inches
-
-                        methodyShit.rotateRight(1568, 1); //74 degrees
-
-                        methodyShit.driveForeward(5437, 1); //30.5 inches
-
-                        methodyShit.placeTeamMarker();
-
-//                        methodyShit.driveBack(15062, 1); //84.5 inches
 
 
-                    } else if (position == MineralPosition.RIGHT) {//right's current tune: needs improvement
-                        telemetry.addData("Executing: Gold Mineral Position", "Right");
-                        telemetry.update();
-                        methodyShit.walkThePlank();
+                    if (ranVuforia == 42) {
+                        methodyShit.ceaseDescent();
+                        if (position == MineralPosition.LEFT) {//actually right \_'.'_/
+                            telemetry.addData("Executing: Gold Mineral Position", "Left");
+                            telemetry.update();
 
-                        methodyShit.rotateLeft(636, 1); //30 degrees
+                            methodyShit.walkThePlank();
 
-                        methodyShit.driveForeward(7843, 1); //44 inches
+                            methodyShit.centerMineral();
 
-                        methodyShit.rotateLeft(1568, 1); //74 degrees
-
-                        methodyShit.driveForeward(5437, 1); //30.5 inches
-
-                        methodyShit.placeTeamMarker();
-
-//                        methodyShit.rotateLeft(1907, 1); //90 degrees
-//
-//                        methodyShit.driveForeward(15062, 1); //84.5 inches
+//                        methodyShit.driveBack(15062, 0.5); //84.5 inches
 
 
-                    } else if (position == MineralPosition.CENTER) {//center's current tune: good enough!
-                        telemetry.addData("Executing: Gold Mineral Position", "Center");
-                        telemetry.update();
-                        methodyShit.walkThePlank();
+                        } else if (position == MineralPosition.RIGHT) {//right's current tune: needs improvement
+                            telemetry.addData("Executing: Gold Mineral Position", "Right");
+                            telemetry.update();
+                            methodyShit.walkThePlank();
 
-                        methodyShit.driveForeward(10800, 1); //60 inches (greater)
+                            methodyShit.centerMineral();
 
-                        methodyShit.placeTeamMarker();
 
-//                        methodyShit.driveForeward(350, 1);
-//
-//                        methodyShit.rotateRight(2754, 1); //137 degrees (needed to be greater)
-//
-//                        methodyShit.driveForeward(5062, 1); //84.5 inches
-//
-//                        methodyShit.rotateRight(500, 1);
-//
-//                        methodyShit.driveForeward(10000, 1);
-
-                    } else if (ranVuforia == 15) {//abusing the vuforia loop counter as a timer
-                        telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
-                        telemetry.update();
-                        methodyShit.walkThePlank();
-                        methodyShit.driveForeward(10695, 1); //60 inches
-
-                        methodyShit.placeTeamMarker();
-
-//                        methodyShit.driveForeward(-450, 1);
-//
-//                        methodyShit.rotateLeft(2904, 1); //137 degrees
-//
-//                        methodyShit.driveForeward(15062, 1); //84.5 inches
+                        } else if (position == MineralPosition.CENTER) {//center's current tune: good enough!
+                            telemetry.addData("Executing: Gold Mineral Position", "Center");
+                            telemetry.update();
+                            methodyShit.walkThePlank();
+                            methodyShit.centerMineral();
+                        } else {//abusing the vuforia loop counter as a timer
+                            telemetry.addData("Executing: Gold Mineral Position", "Did not find, executing center");
+                            telemetry.update();
+                            methodyShit.walkThePlank();
+                            methodyShit.centerMineral();
+                        }
                     }
-
-
 
                 }
             }
