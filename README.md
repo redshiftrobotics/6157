@@ -1,5 +1,5 @@
 # THIS REPOSITORY HAS BEEN ARCHIVED
-## As 6157 Horizon's 2018-2019 (Rover Ruckus) season has ended, this repository has been archived.
+## As 6157 Eclipse's 2018-2019 (Rover Ruckus) season has ended, this repository has been archived.
 
 *WARNING:* The night before our interleague competition, git exploded and deleted much of our code. Consequently, the code we actually used to compete (which was only preserved on the phone) is not present in this repository.
 
